@@ -27,7 +27,7 @@ public class ZooPlayground {
 		GoldenRetriever airbud = new GoldenRetriever(4);
 		airbud.makeSound();
 //		airbud.dig();
-//		airbud.playBasketball();
+		airbud.playBasketball();
 		
 		Animal steve = new Human(30);
 		//steve.think();
