@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
@@ -32,7 +33,7 @@ public class EvaluationService {
 	public String acronym(String phrase) {
 		String[] words = phrase.split("\\P{Alpha}+");
 		StringBuilder acronym = new StringBuilder("");
-		for(String word : words) {
+		for (String word : words) {
 			char letter = word.charAt(0);
 			letter = Character.toUpperCase(letter);
 			acronym.append(letter);
@@ -94,9 +95,7 @@ public class EvaluationService {
 		}
 
 		public boolean isIsosceles() {
-			return this.sideOne == this.sideTwo
-					|| this.sideOne == this.sideThree
-					|| this.sideTwo == this.sideThree;
+			return this.sideOne == this.sideTwo || this.sideOne == this.sideThree || this.sideTwo == this.sideThree;
 		}
 
 		public boolean isScalene() {
@@ -121,8 +120,40 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		HashMap<Character, Integer> values = new HashMap<>();
+		values.put('A', 1);
+		values.put('E', 1);
+		values.put('I', 1);
+		values.put('O', 1);
+		values.put('U', 1);
+		values.put('L', 1);
+		values.put('N', 1);
+		values.put('R', 1);
+		values.put('S', 1);
+		values.put('T', 1);
+		values.put('D', 2);
+		values.put('G', 2);
+		values.put('B', 3);
+		values.put('C', 3);
+		values.put('M', 3);
+		values.put('P', 3);
+		values.put('F', 4);
+		values.put('H', 4);
+		values.put('V', 4);
+		values.put('W', 4);
+		values.put('Y', 4);
+		values.put('K', 5);
+		values.put('J', 8);
+		values.put('X', 8);
+		values.put('Q', 10);
+		values.put('Z', 10);
+
+		for (char c : string.toCharArray()) {
+			score += values.get(Character.toTitleCase(c));
+		}
+
+		return score;
 	}
 
 	/**
