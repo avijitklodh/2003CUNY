@@ -187,9 +187,14 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String cleanPhoneNumber(String string) throws IllegalArgumentException {
+		StringBuilder number = new StringBuilder(string.replaceAll("\\D+", ""));
+		if (number.length() == 11 && number.charAt(0) == 1) {
+			number.deleteCharAt(0);
+		} else if (number.length() != 10 || number.charAt(0) < 2) {
+			throw new IllegalArgumentException();
+		}
+		return number.toString();
 	}
 
 	/**
