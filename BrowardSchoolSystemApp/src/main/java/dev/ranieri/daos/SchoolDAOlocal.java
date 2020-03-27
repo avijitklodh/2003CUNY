@@ -10,10 +10,11 @@ import dev.ranieri.entities.School;
 public class SchoolDAOlocal implements SchoolDAO{
 	
 	private static Map<Integer,School> school_table = new HashMap<Integer,School>();
-	private int idGenerator = 101;
+	private static int idGenerator = 101;
 
 	// all entities have an id of 0
 	// they have an id of 0 because they are not saved yet
+	
 	public School createSchool(School school) {	
 		
 		school.setSchoolId(idGenerator);
