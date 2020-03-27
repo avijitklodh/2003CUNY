@@ -28,8 +28,7 @@ public class RegistrarServiceImpl implements RegistrarService{
 		this.studentdao.deleteStudent(student);
 		School school = schooldao.getSchoolById(student.getSchoolId());
 		school.getStudents().remove(student);
-		
-		student.setStudentId(-1);
+		student.setSchoolId(-1);
 		return student;
 	}
 
