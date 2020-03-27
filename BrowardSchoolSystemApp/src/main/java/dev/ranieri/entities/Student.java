@@ -39,6 +39,7 @@ public class Student {
 	public void setSchoolId(int schoolId) {
 		this.schoolId = schoolId;
 	}
+	
 
 	@Override
 	public String toString() {
