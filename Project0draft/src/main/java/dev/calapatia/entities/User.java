@@ -1,6 +1,8 @@
 package dev.calapatia.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class User {
@@ -12,7 +14,7 @@ public class User {
 	
 	private String password;
 	
-	Set<BankAccount> accounts = new HashSet<BankAccount>();
+	List<BankAccount> accounts = new ArrayList<BankAccount>();
 
 	public int getUserId() {
 		return userId;
@@ -38,11 +40,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<BankAccount> getAccounts() {
+	public List<BankAccount> getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(Set<BankAccount> accounts) {
+	public void setAccounts(List<BankAccount> accounts) {
 		this.accounts = accounts;
 	}
 
