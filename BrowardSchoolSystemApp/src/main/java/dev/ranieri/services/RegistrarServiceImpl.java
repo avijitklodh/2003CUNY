@@ -2,15 +2,17 @@ package dev.ranieri.services;
 
 import dev.ranieri.daos.SchoolDAO;
 import dev.ranieri.daos.SchoolDAOlocal;
+import dev.ranieri.daos.SchoolDAOmaria;
 import dev.ranieri.daos.StudentDAO;
 import dev.ranieri.daos.StudentDAOlocal;
+import dev.ranieri.daos.StudentDAOmaria;
 import dev.ranieri.entities.School;
 import dev.ranieri.entities.Student;
 
 public class RegistrarServiceImpl implements RegistrarService{
 	
-	private SchoolDAO schooldao = new SchoolDAOlocal();
-	private StudentDAO studentdao = new StudentDAOlocal();
+	private SchoolDAO schooldao = new SchoolDAOmaria();
+	private StudentDAO studentdao = new StudentDAOmaria();
 
 	public Student enrollStudent(Student student) {
 		this.studentdao.createStudent(student);

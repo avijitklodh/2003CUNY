@@ -22,30 +22,14 @@ public class RegistrarServictests {
 	public void test() {
 		School glades = new School();
 		glades.setName("Coral Glades");
-		glades.setCapacity(1000);
-		
-		School douglas = new School();
-		douglas.setName("Stoneman Douglas");
-		douglas.setCapacity(2000);
-		
+		glades.setCapacity(1000);		
+
 		Student adam = new Student();
 		adam.setName("Adam");
-		
-		ss.establishSchool(douglas);
+
 		ss.establishSchool(glades);
-		
 		rs.enrollStudent(adam,glades);
-		
-		System.out.println(douglas);
-		System.out.println(glades);
-		System.out.println(adam);
-		
-		System.out.println("Transfer occurs");
-		rs.transferStudent(adam, douglas);
-		
-		System.out.println(douglas);
-		System.out.println(glades);
-		System.out.println(adam);
+
 		
 	}
 
