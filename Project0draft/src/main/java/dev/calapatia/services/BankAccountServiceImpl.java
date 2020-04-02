@@ -24,8 +24,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 	}
 
 	public BankAccount withdraw(BankAccount account, User user) {
-		User currentUser = userdao.getUserById(user.getUserId());
-		currentUser.get
+	//	User currentUser = userdao.getUserById(user.getUserId());
+		//currentUser.get
+		return null;
 	}
 	
 //	public BankAccount deposit(BankAccount account, User user) {

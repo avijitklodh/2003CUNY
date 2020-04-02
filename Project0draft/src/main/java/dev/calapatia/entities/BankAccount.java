@@ -5,7 +5,7 @@ public class BankAccount {
 	// Primary key
 	private int bankAccountId;
 	private double balance;
-	private double amount;
+	//private double amount;
 	
 	//foreign key
 	private int userId;
@@ -46,17 +46,17 @@ public class BankAccount {
 
 
 
-	public double getAmount() {
-		return amount;
-	}
+//	public double getAmount() {
+//		return amount;
+//	}
 
 
 
 
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+//	public void setAmount(double amount) {
+//		this.amount = amount;
+//	}
 
 
 
@@ -80,8 +80,7 @@ public class BankAccount {
 
 	@Override
 	public String toString() {
-		return "BankAccount [bankAccountId=" + bankAccountId + ", balance=" + balance + ", amount=" + amount
-				+ ", userId=" + userId + "]";
+		return "BankAccount [bankAccountId=" + bankAccountId + ", balance=" + balance + ", userId=" + userId + "]";
 	}
 
 	
