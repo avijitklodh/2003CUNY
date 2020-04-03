@@ -11,14 +11,10 @@ public interface UserDAO {
 		//READ
 		//UPDATE
 		//DELETE
+	User getUserById(int id);
 	
 	User createUser(User user);
-	
-	User getUserById(int id);
 
-	
-	
-	User updateUser(User user);
 	
 	boolean deleteUser(User user);
 

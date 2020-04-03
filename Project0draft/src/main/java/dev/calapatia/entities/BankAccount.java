@@ -4,7 +4,7 @@ public class BankAccount {
 	
 	// Primary key
 	private int bankAccountId;
-	private double balance;
+	private int balance;
 	//private double amount;
 	
 	//foreign key
@@ -30,7 +30,7 @@ public class BankAccount {
 
 
 
-	public double getBalance() {
+	public int getBalance() {
 		return balance;
 	}
 
@@ -38,7 +38,7 @@ public class BankAccount {
 
 
 
-	public void setBalance(double balance) {
+	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 

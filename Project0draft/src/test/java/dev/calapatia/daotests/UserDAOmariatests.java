@@ -13,18 +13,30 @@ import dev.calapatia.entities.User;
 
 public class UserDAOmariatests {
 	public static UserDAO udao = new UserDAOmaria();
-
+	
 	@Test
 	public void getUserById() {
 		User leroy = udao.getUserById(1);
 		System.out.println(leroy);
 	}
+
+	@Test
+	public void createUser() {
+		
+		User enigma = new User();
+		enigma.setUsername("Testing");
+		enigma.setPassword("BakaTest");
+		
+		
+		udao.createUser(enigma);
+		System.out.println(enigma);
+		
+	}
 	
-//	@Test
-//	public void deleteUser() {
-//		User user = udao.getUserById(1);
-//		udao.deleteUser(user);
-//		
-//	}
+	@Test
+	public void deleteUser() {
+		User user = udao.getUserById(6);
+		udao.deleteUser(user);	
+	}
 
 }

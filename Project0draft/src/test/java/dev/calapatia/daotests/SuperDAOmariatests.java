@@ -27,8 +27,7 @@ public class SuperDAOmariatests {
 	@Test
 	public void deleteUser() {
 		User user = sudao.getUserById(1);
-		sudao.deleteUser(user);
-		
+		sudao.deleteUser(user);	
 	}
 	
 	@Test
