@@ -18,6 +18,6 @@ public interface UserDAO {
 
 	User updateUser(User user);
 
-	boolean deleteUser(User user);
+	boolean deleteUserById(String id);
 
 }

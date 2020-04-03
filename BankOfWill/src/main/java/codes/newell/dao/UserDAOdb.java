@@ -37,8 +37,7 @@ public class UserDAOdb implements UserDAO {
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
-		// TODO Auto-generated method stub
+	public boolean deleteUserById(String id) {
 		return false;
 	}
 
