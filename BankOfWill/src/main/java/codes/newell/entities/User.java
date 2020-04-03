@@ -1,10 +1,13 @@
 package codes.newell.entities;
 
+import codes.newell.utilities.Hasher;
+
 public class User {
 
 	private String id;
-	private String name;
-	private String password;
+	private String firstName;
+	private String lastName;
+	private String passwordHash;
 	private String username;
 	private boolean adminStatus;
 
@@ -20,19 +23,25 @@ public class User {
 	}
 
 	public String getName() {
-		return name;
+		return firstName + ' ' + lastName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		String[] names = name.split(" ");
+		this.firstName = names[0];
+		this.lastName = names[names.length - 1];
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String passwordHash) {
+		// AES-256 is fixed length, assume raw password if length doesn't match
+		if (passwordHash.length() != 64) {
+			passwordHash = Hasher.hash(passwordHash);
+		}
+		this.passwordHash = passwordHash;
 	}
 
 	public String getUsername() {
@@ -51,10 +60,26 @@ public class User {
 		this.adminStatus = adminStatus;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", username=" + username
-				+ ", adminStatus=" + adminStatus + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", passwordHash="
+				+ passwordHash + ", username=" + username + ", adminStatus=" + adminStatus + "]";
 	}
 
 }
