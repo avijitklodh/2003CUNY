@@ -6,10 +6,10 @@ public class Transaction {
 	private String id;
 	private BankCurrency amount;
 	private String message;
-	private LocalDateTime date = LocalDateTime.now();
-	private String fromAccount;
-	private String toAccount;
-	private String user;
+	private LocalDateTime t_date = LocalDateTime.now();
+	private String from_account;
+	private String to_account;
+	private String customer_id;
 
 	public Transaction() {
 	}
@@ -36,11 +36,11 @@ public class Transaction {
 	}
 
 	public LocalDateTime getDate() {
-		return date;
+		return t_date;
 	}
 
 	public void setDate(LocalDateTime date) {
-		this.date = date;
+		this.t_date = date;
 	}
 
 	public String getId() {
@@ -52,33 +52,33 @@ public class Transaction {
 	}
 
 	public String getFromAccount() {
-		return fromAccount;
+		return from_account;
 	}
 
 	public void setFromAccount(String fromAccount) {
-		this.fromAccount = fromAccount;
+		this.from_account = fromAccount;
 	}
 
 	public String getToAccount() {
-		return toAccount;
+		return to_account;
 	}
 
 	public void setToAccount(String toAccount) {
-		this.toAccount = toAccount;
+		this.to_account = toAccount;
 	}
 
 	public String getUser() {
-		return user;
+		return customer_id;
 	}
 
 	public void setUser(String user) {
-		this.user = user;
+		this.customer_id = user;
 	}
 
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", amount=" + amount + ", message=" + message + ", date=" + date
-				+ ", fromAccount=" + fromAccount + ", toAccount=" + toAccount + ", user=" + user + "]";
+		return "Transaction [id=" + id + ", amount=" + amount + ", message=" + message + ", date=" + t_date
+				+ ", fromAccount=" + from_account + ", toAccount=" + to_account + ", user=" + customer_id + "]";
 	}
 
 }

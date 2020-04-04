@@ -4,6 +4,7 @@ create table customer (
 	id				uuid default uuid_generate_v4(),
 	first_name		varchar(200) not null,
 	last_name		varchar(200) not null,
+	
 	username		varchar(200) unique not null,
 	password_hash	varchar(200) not null,
 	is_super 		boolean default false,
@@ -13,6 +14,7 @@ create table customer (
 create table account (
 	id 				uuid default uuid_generate_v4(),
 	balance 		money,
+	nickname		varchar(200),
 	primary key		(id)
 );
 
@@ -23,12 +25,14 @@ create table customer_account (
 );
 
 create table transaction_log (
+	id 				uuid default uuid_generate_v4(),
+	t_date			timestamp default current_timestamp,
+	amount			money not null,
+	message			varchar,
+	to_account		uuid references account(id),
 	customer_id		uuid,
 	from_account	uuid,
-	to_account		uuid references account(id),
 	foreign key (customer_id, from_account) references customer_account (customer_id, account_id),
-	t_date			timestamp default current_timestamp,
-	amount			money
 );
 
 drop table customer;

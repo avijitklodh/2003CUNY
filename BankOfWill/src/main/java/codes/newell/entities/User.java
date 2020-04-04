@@ -4,12 +4,13 @@ import codes.newell.utilities.Hasher;
 
 public class User {
 
+	// internal names match database names for easier DAO reflection
 	private String id;
-	private String firstName;
-	private String lastName;
-	private String passwordHash;
+	private String first_name;
+	private String last_name;
+	private String password_hash;
 	private String username;
-	private boolean adminStatus;
+	private boolean is_super;
 
 	public User() {
 	}
@@ -23,17 +24,17 @@ public class User {
 	}
 
 	public String getName() {
-		return firstName + ' ' + lastName;
+		return first_name + ' ' + last_name;
 	}
 
 	public void setName(String name) {
 		String[] names = name.split(" ");
-		this.firstName = names[0];
-		this.lastName = names[names.length - 1];
+		this.first_name = names[0];
+		this.last_name = names[names.length - 1];
 	}
 
 	public String getPasswordHash() {
-		return passwordHash;
+		return password_hash;
 	}
 
 	public void setPasswordHash(String passwordHash) {
@@ -41,7 +42,7 @@ public class User {
 		if (passwordHash.length() != 64) {
 			passwordHash = Hasher.hash(passwordHash);
 		}
-		this.passwordHash = passwordHash;
+		this.password_hash = passwordHash;
 	}
 
 	public String getUsername() {
@@ -52,34 +53,34 @@ public class User {
 		this.username = username;
 	}
 
-	public boolean isAdminStatus() {
-		return adminStatus;
+	public boolean getAdminStatus() {
+		return is_super;
 	}
 
 	public void setAdminStatus(boolean adminStatus) {
-		this.adminStatus = adminStatus;
+		this.is_super = adminStatus;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return first_name;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.first_name = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return last_name;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.last_name = lastName;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", passwordHash="
-				+ passwordHash + ", username=" + username + ", adminStatus=" + adminStatus + "]";
+		return "User [id=" + id + ", firstName=" + first_name + ", lastName=" + last_name + ", passwordHash="
+				+ password_hash + ", username=" + username + ", adminStatus=" + is_super + "]";
 	}
 
 }

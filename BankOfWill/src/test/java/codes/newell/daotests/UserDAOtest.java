@@ -1,10 +1,12 @@
 package codes.newell.daotests;
 
+import static org.junit.Assume.assumeNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,11 @@ class UserDAOtest {
 			will.setUsername("newell");
 			will.setPasswordHash(Hasher.hash("dudewhere'smypassword"));
 			FullCRUDTest.expected = udao.createUser(will);
+		}
+
+		@BeforeEach
+		void assumptions() {
+			assumeNotNull(expected);
 		}
 
 		@Test
