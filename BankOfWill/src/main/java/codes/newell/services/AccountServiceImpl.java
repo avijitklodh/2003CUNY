@@ -3,7 +3,6 @@ package codes.newell.services;
 import java.util.List;
 
 import codes.newell.entities.Account;
-import codes.newell.entities.BankCurrency;
 import codes.newell.entities.Transaction;
 import codes.newell.entities.User;
 import codes.newell.utilities.InsufficientFundsException;
@@ -32,18 +31,11 @@ public class AccountServiceImpl implements AccountService {
 		return null;
 	}
 
-	private static boolean canTransact(Account account, BankCurrency amount) {
-		BankCurrency copy = new BankCurrency();
-		copy.setRawValue(account.getBalance().getRawValue());
-		copy.add(amount);
-		return copy.getRawValue().doubleValue() > 0;
-	}
-
 	@Override
-	public Transaction withdrawFunds(Account account, BankCurrency amount) throws InsufficientFundsException {
-		if (canTransact(account, amount)) {
-			BankCurrency balance = account.getBalance();
-			balance.add(amount);
+	public Transaction withdrawFunds(Account account, double amount) throws InsufficientFundsException {
+		final double newBalance = account.getBalance() - amount;
+		if (newBalance >= 0) {
+			account.setBalance(newBalance);
 			// TODO: make transaction && add to log
 		} else {
 			throw new InsufficientFundsException();
@@ -64,13 +56,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account openAccount(User user, BankCurrency amount) {
+	public Account openAccount(User user, double amount) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Transaction addFunds(Account account, BankCurrency amount) {
+	public Transaction addFunds(Account account, double amount) {
 		// TODO Auto-generated method stub
 		return null;
 	}

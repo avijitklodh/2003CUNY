@@ -7,7 +7,6 @@ import com.google.common.graph.MutableValueGraph;
 import com.google.common.graph.ValueGraphBuilder;
 
 import codes.newell.entities.Account;
-import codes.newell.entities.BankCurrency;
 import codes.newell.services.AccountService;
 import codes.newell.services.AccountServiceImpl;
 import codes.newell.utilities.InsufficientFundsException;
@@ -25,23 +24,22 @@ public class Portal {
 		System.out.println(edge);
 
 		Account account = new Account();
-		BankCurrency balance = new BankCurrency("200.94");
-		account.setBalance(balance);
+		account.setBalance(300.0);
 
 		AccountService aci = new AccountServiceImpl();
 
 		try {
-			aci.withdrawFunds(account, new BankCurrency("-200"));
+			aci.withdrawFunds(account, -200.0);
 		} catch (InsufficientFundsException e) {
 			e.printStackTrace();
 		}
 
 		try {
-			aci.withdrawFunds(account, new BankCurrency("-200"));
+			aci.withdrawFunds(account, -200.0);
 		} catch (InsufficientFundsException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(account.getBalance().getFomattedValue());
+		System.out.println(account.getBalance());
 	}
 }

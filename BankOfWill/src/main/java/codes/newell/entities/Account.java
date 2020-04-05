@@ -3,7 +3,7 @@ package codes.newell.entities;
 public class Account {
 
 	private String id;
-	private BankCurrency balance = new BankCurrency();
+	private double balance;
 	private String nickname;
 
 	public Account() {
@@ -17,11 +17,11 @@ public class Account {
 		this.id = id;
 	}
 
-	public BankCurrency getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(BankCurrency balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 

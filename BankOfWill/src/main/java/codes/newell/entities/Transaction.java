@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Transaction {
 	private String id;
-	private BankCurrency amount;
+	private double amount;
 	private String message;
 	private LocalDateTime t_date = LocalDateTime.now();
 	private String from_account;
@@ -14,16 +14,16 @@ public class Transaction {
 	public Transaction() {
 	}
 
-	public Transaction(String amount, String message) {
-		this.amount = new BankCurrency(amount);
+	public Transaction(double amount, String message) {
+		this.amount = amount;
 		this.message = message;
 	}
 
-	public BankCurrency getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(BankCurrency amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
