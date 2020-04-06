@@ -127,22 +127,22 @@ public class BankAccountDAOmaria implements BankAccountDAO {
 
 	@Override
 	public BankAccount updateBankAccount(BankAccount account) {
-		return account;
-//try(Connection conn = ConnectionUtil.createConnection()){
-//			
-//			String sql = "UPDATE Project0.BANKACCOUNT SET BANK_ACCOUNT_ID = ?, BALANCE = ? WHERE USER_ID = ?";
-//			PreparedStatement ps = conn.prepareStatement(sql);
-//			ps.setInt(1, account.getBankAccountId());
-//			ps.setInt(2, account.getBalance());
-//			ps.setInt(3, account.getUserId());
-//			ps.execute();
-//			
-//			return account;
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
+		
+try(Connection conn = ConnectionUtil.createConnection()){
+			
+			String sql = "UPDATE Project0.BANKACCOUNT SET BANK_ACCOUNT_ID = ?, BALANCE = ? WHERE USER_ID = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, account.getBankAccountId());
+			ps.setInt(2, account.getBalance());
+			ps.setInt(3, account.getUserId());
+			ps.execute();
+			
+			return account;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

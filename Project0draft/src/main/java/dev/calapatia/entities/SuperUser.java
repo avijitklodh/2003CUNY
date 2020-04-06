@@ -16,11 +16,13 @@ public class SuperUser {
 	
 	//Foreign Key
 	private int userId;
-	
-	private int bankAccountId;
 
-	public int getsuperUserId() {
+	public int getSuperUserId() {
 		return superUserId;
+	}
+
+	public void setSuperUserId(int superUserId) {
+		this.superUserId = superUserId;
 	}
 
 	public String getUsername() {
@@ -46,36 +48,26 @@ public class SuperUser {
 	public void setAccounts(List<BankAccount> accounts) {
 		this.accounts = accounts;
 	}
-	
+
 	public int getUserId() {
 		return userId;
 	}
 
-
-
-
-
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-	
-	public int getBankAccountId() {
-		return bankAccountId;
-	}
-
-
-
-
-
-	public void setBankAccountId(int bankAccountId) {
-		this.bankAccountId = bankAccountId;
 	}
 
 	@Override
 	public String toString() {
 		return "SuperUser [superUserId=" + superUserId + ", username=" + username + ", password=" + password
-				+ ", accounts=" + accounts + ", userId=" + userId + ", bankAccountId=" + bankAccountId + "]";
+				+ ", accounts=" + accounts + ", userId=" + userId + "]";
 	}
+	
+	
+
+	
+
+
 
 	
 

@@ -5,7 +5,7 @@ public class BankAccount {
 	// Primary key
 	private int bankAccountId;
 	private int balance;
-	//private double amount;
+	private int amount;
 	
 	//foreign key
 	private int userId;
@@ -46,17 +46,17 @@ public class BankAccount {
 
 
 
-//	public double getAmount() {
-//		return amount;
-//	}
+	public int getAmount() {
+		return amount;
+	}
 
 
 
 
 
-//	public void setAmount(double amount) {
-//		this.amount = amount;
-//	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 
 
 
@@ -82,6 +82,12 @@ public class BankAccount {
 	public String toString() {
 		return "BankAccount [bankAccountId=" + bankAccountId + ", balance=" + balance + ", userId=" + userId + "]";
 	}
+
+
+
+
+
+	
 
 	
 

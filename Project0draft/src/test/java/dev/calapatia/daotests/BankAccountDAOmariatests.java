@@ -14,6 +14,8 @@ import dev.calapatia.entities.BankAccount;
 
 
 
+
+
 public class BankAccountDAOmariatests {
 
 	public static BankAccountDAO badao = new BankAccountDAOmaria();
@@ -44,13 +46,15 @@ public class BankAccountDAOmariatests {
 		List <BankAccount> accounts = badao.getAllBankAccountByUserId(1);
 		System.out.println(accounts);
 	}
-//	@Test
-//	public void updateBankAccount() {
-//		BankAccount something = badao.getSchoolById(2);
-//		something.setName("Super Coral Glades");
-//		schooldao.updateSchool(coral);
-//		System.out.println(coral);
-//	}
+	@Test
+	public void updateBankAccount() {
+		BankAccount test = badao.getBankAccountById(2);
+		test.setBalance(800);
+		badao.updateBankAccount(test);
+		System.out.println(test);
+	
+	System.out.println(test);
+	}
 	
 	@Test
 	public void deleteBankAccount() {
