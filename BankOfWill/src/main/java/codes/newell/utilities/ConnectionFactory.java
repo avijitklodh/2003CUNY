@@ -9,35 +9,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class QueryFactory {
-	private enum DDL {
-		DML, DQL
-	}
-
-	private DDL type;
-
-	private QueryFactory() {
+public class ConnectionFactory {
+	private ConnectionFactory() {
 
 	}
 
-	QueryManager buildManager(String query) {
-		if (query.contains("SELECT")) {
-			type = DDL.DQL;
-		}
-		switch (type) {
-		case DML:
-			return new DMLManager(query);
-		case DQL:
+	public static ConnectionManager buildManager(String query) {
+		if (query.contains("select")) {
 			return new DQLManager(query);
-		default:
-			return null;
+		} else {
+			return new DMLManager(query);
 		}
 	}
 
-	private static abstract class DDLManager implements QueryManager {
+	private static abstract class DDLManager implements ConnectionManager {
 
 		protected final String query;
 
@@ -82,6 +71,12 @@ public class QueryFactory {
 					case "String":
 						ps.setString(i + 1, ((String) params.get(i)));
 						break;
+					case "Double":
+						ps.setDouble(i + 1, ((Double) params.get(i)));
+						break;
+					case "Boolean":
+						ps.setBoolean(i + 1, ((Boolean) params.get(i)));
+						break;
 					default:
 						throw new NoSuchMethodException("PreparedStatement: No known method for object type: " + name);
 					}
@@ -94,9 +89,15 @@ public class QueryFactory {
 		@Override
 		public abstract ResultSet executeWithParameters(List<Object> parameters) throws NoSuchMethodException;
 
+		@Override
+		public ResultSet executeWithParameter(Object param) throws NoSuchMethodException {
+			List<Object> params = new ArrayList<>();
+			params.add(param);
+			return this.executeWithParameters(params);
+		}
 	}
 
-	private class DMLManager extends DDLManager {
+	private static class DMLManager extends DDLManager {
 		private DMLManager(String query) {
 			super(query);
 		}
@@ -105,7 +106,10 @@ public class QueryFactory {
 		public ResultSet executeWithParameters(List<Object> params) throws NoSuchMethodException {
 			try (Connection con = createConnection()) {
 				PreparedStatement ps = con.prepareStatement(this.query, Statement.RETURN_GENERATED_KEYS);
-				applyParameters(ps, params);
+				if (params.size() > 0) {
+					applyParameters(ps, params);
+				}
+				ps.execute();
 				return ps.getGeneratedKeys();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -114,7 +118,7 @@ public class QueryFactory {
 		}
 	}
 
-	private class DQLManager extends DDLManager {
+	private static class DQLManager extends DDLManager {
 		private DQLManager(String query) {
 			super(query);
 		}
@@ -123,7 +127,9 @@ public class QueryFactory {
 		public ResultSet executeWithParameters(List<Object> params) throws NoSuchMethodException {
 			try (Connection con = createConnection()) {
 				PreparedStatement ps = con.prepareStatement(this.query);
-				applyParameters(ps, params);
+				if (params.size() > 0) {
+					applyParameters(ps, params);
+				}
 				return ps.executeQuery();
 			} catch (SQLException e) {
 				e.printStackTrace();
