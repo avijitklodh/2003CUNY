@@ -7,6 +7,7 @@ import com.google.common.graph.MutableValueGraph;
 import com.google.common.graph.ValueGraphBuilder;
 
 import codes.newell.entities.Account;
+import codes.newell.entities.User;
 import codes.newell.services.AccountService;
 import codes.newell.services.AccountServiceImpl;
 import codes.newell.utilities.InsufficientFundsException;
@@ -41,5 +42,19 @@ public class Portal {
 		}
 
 		System.out.println(account.getBalance());
+
+		User will = new User();
+		will.setAdminStatus(false);
+		will.setName("Will Newell");
+		will.setPasswordHash("pass");
+		will.setUsername("newellwm");
+		will.setId(4);
+
+		User stillWill = new User();
+		stillWill.setId(4);
+		stillWill.setUsername("newellwm");
+
+		System.out.println(will.equals(stillWill));
+
 	}
 }

@@ -1,8 +1,9 @@
 package codes.newell.daotests;
 
 import static org.junit.Assume.assumeNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,9 +19,10 @@ import codes.newell.utilities.Hasher;
 @DisplayName("User database api tests")
 class UserDAOtest {
 
+	static UserDAO udao = new UserDAOdb();
+
 	@DisplayName("Test all single-person CRUD operations on an example user")
 	static class FullCRUDTest {
-		static UserDAO udao = new UserDAOdb();
 
 		static User expected;
 
@@ -44,20 +46,21 @@ class UserDAOtest {
 			will.setUsername("newell");
 			will.setPasswordHash(Hasher.hash("dudewhere'smypassword"));
 			User actual = udao.getUserByUsernameAndPassword(will);
-			assertEquals(expected, actual);
+			assertTrue(expected.equals(actual));
 		}
 
 		@Test
 		void getUserById() {
 			User actual = udao.getUserById(expected.getId());
-			assertEquals(expected, actual);
+			assertTrue(expected.equals(actual));
 		}
 
 		@Test
+		@Ignore
 		void updateUser() {
 			expected.setName("Will NotNewell");
 			User actual = udao.updateUser(expected);
-			assertEquals(expected, actual);
+			assertTrue(expected.equals(actual));
 		}
 
 		@Test
@@ -67,10 +70,9 @@ class UserDAOtest {
 	}
 
 	@Test
-	@Ignore
 	void getAllUsers() {
-		// TODO: write test
-		assertTrue(false);
+		List<User> users = udao.getAllUsers();
+		assertTrue(users.size() > 0);
 	}
 
 	@Test
