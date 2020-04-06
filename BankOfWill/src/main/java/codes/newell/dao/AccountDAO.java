@@ -6,16 +6,16 @@ import codes.newell.entities.Account;
 
 public interface AccountDAO {
 
-	Account getAccountById(int id);
+	Account getAccountById(Integer id);
 
 	List<Account> getAllAccounts();
 
-	List<Account> getAllAccountsByUserId(int id);
+	List<Account> getAllAccountsByUserId(Integer id);
 
 	Account createAccount(Account account);
 
 	Account updateAccount(Account account);
 
-	boolean deleteAccount(Account account);
+	boolean deleteAccountById(Integer id);
 
 }
