@@ -6,11 +6,11 @@ import codes.newell.entities.Account;
 
 public interface AccountDAO {
 
-	Account getAccountById(String id);
+	Account getAccountById(int id);
 
 	List<Account> getAllAccounts();
 
-	List<Account> getAllAccountsByUserId(String id);
+	List<Account> getAllAccountsByUserId(int id);
 
 	Account createAccount(Account account);
 

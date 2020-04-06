@@ -6,18 +6,18 @@ import codes.newell.entities.User;
 
 public interface UserDAO {
 
-	User getUserById(String id);
+	User getUserById(Integer id);
 
 	User getUserByUsernameAndPassword(User user);
 
 	List<User> getAllUsers();
 
-	List<User> getAllUsersByAccountId(String id);
+	List<User> getAllUsersByAccountId(Integer id);
 
 	User createUser(User user);
 
 	User updateUser(User user);
 
-	boolean deleteUserById(String id);
+	boolean deleteUserById(Integer id);
 
 }

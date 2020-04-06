@@ -7,7 +7,7 @@ import codes.newell.entities.Account;
 public class AccountDAOdb implements AccountDAO {
 
 	@Override
-	public Account getAccountById(String id) {
+	public Account getAccountById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -19,7 +19,7 @@ public class AccountDAOdb implements AccountDAO {
 	}
 
 	@Override
-	public List<Account> getAllAccountsByUserId(String id) {
+	public List<Account> getAllAccountsByUserId(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -8,9 +8,9 @@ public interface TransactionLogDAO {
 
 	Transaction createTransaction(Transaction transaction);
 
-	Transaction getTransactionById(String id);
+	Transaction getTransactionById(int id);
 
-	List<Transaction> getTransactionsByUserId(String id);
+	List<Transaction> getTransactionsByUserId(int id);
 
-	List<Transaction> getTransactionsByAccountId(String id);
+	List<Transaction> getTransactionsByAccountId(int id);
 }

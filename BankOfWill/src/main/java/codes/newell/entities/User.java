@@ -5,21 +5,21 @@ import codes.newell.utilities.Hasher;
 public class User {
 
 	// internal names match database names for easier DAO reflection
-	private String id;
+	private int id;
 	private String first_name;
 	private String last_name;
-	private String password_hash;
 	private String username;
+	private String password_hash;
 	private boolean is_super;
 
 	public User() {
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -81,6 +81,17 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + first_name + ", lastName=" + last_name + ", passwordHash="
 				+ password_hash + ", username=" + username + ", adminStatus=" + is_super + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+
+		User user = (User) obj;
+		return user.id == this.id;
 	}
 
 }

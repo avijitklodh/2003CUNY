@@ -3,13 +3,13 @@ package codes.newell.entities;
 import java.time.LocalDateTime;
 
 public class Transaction {
-	private String id;
+	private int id;
 	private double amount;
 	private String message;
 	private LocalDateTime t_date = LocalDateTime.now();
-	private String from_account;
-	private String to_account;
-	private String customer_id;
+	private int from_account;
+	private int to_account;
+	private int customer_id;
 
 	public Transaction() {
 	}
@@ -43,35 +43,35 @@ public class Transaction {
 		this.t_date = date;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getFromAccount() {
+	public int getFromAccount() {
 		return from_account;
 	}
 
-	public void setFromAccount(String fromAccount) {
+	public void setFromAccount(int fromAccount) {
 		this.from_account = fromAccount;
 	}
 
-	public String getToAccount() {
+	public int getToAccount() {
 		return to_account;
 	}
 
-	public void setToAccount(String toAccount) {
+	public void setToAccount(int toAccount) {
 		this.to_account = toAccount;
 	}
 
-	public String getUser() {
+	public int getUser() {
 		return customer_id;
 	}
 
-	public void setUser(String user) {
+	public void setUser(int user) {
 		this.customer_id = user;
 	}
 
