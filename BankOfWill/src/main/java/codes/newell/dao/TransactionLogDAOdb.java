@@ -126,4 +126,22 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 		return t;
 	}
 
+	@Override
+	public boolean deleteTransactionsByAccountId(Integer id) {
+		QueryBuilder<Transaction> qb = new QueryBuilder<>(new Transaction(), QueryBuilder.DELETE);
+		qb.customWhereClause("where to_account = ? or from_account = ?");
+		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
+		List<Object> params = new ArrayList<>();
+		params.add(id);
+		params.add(id);
+		try {
+			cm.executeWithParameters(params);
+			return true;
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

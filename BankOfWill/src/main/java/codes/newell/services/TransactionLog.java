@@ -9,4 +9,5 @@ public interface TransactionLog {
 
 	List<Transaction> getTransactionsByAccountId(Integer id);
 
+	boolean deleteTransactionsByAccountId(Integer id);
 }

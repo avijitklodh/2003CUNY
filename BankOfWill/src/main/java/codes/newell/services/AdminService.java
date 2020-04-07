@@ -9,6 +9,8 @@ public interface AdminService {
 
 	List<User> getUsersByAccountId(Integer id);
 
+	User getUserByUsername(String username);
+
 	User getUserById(Integer id);
 
 	User createUser(User user);

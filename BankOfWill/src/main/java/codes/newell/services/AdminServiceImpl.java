@@ -4,11 +4,13 @@ import java.util.List;
 
 import codes.newell.dao.UserDAO;
 import codes.newell.dao.UserDAOdb;
+import codes.newell.entities.Account;
 import codes.newell.entities.User;
 
 public class AdminServiceImpl implements AdminService {
 
 	static UserDAO udao = new UserDAOdb();
+	static AccountService as = new AccountServiceImpl();
 
 	@Override
 	public List<User> getAllUsers() {
@@ -37,8 +39,18 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public boolean deleteUserById(Integer id) {
-		// TODO: need to withdraw all money in accounts owned only by the user
+		User user = this.getUserById(id);
+		List<Account> accounts = as.getAccountsByUserId(id);
+
+		for (Account a : accounts) {
+			as.closeAccount(a, user);
+		}
 		return udao.deleteUserById(id);
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		return udao.getUserByUsername(username);
 	}
 
 }

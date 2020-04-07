@@ -13,4 +13,6 @@ public interface TransactionLogDAO {
 	List<Transaction> getTransactionsByUserId(Integer id);
 
 	List<Transaction> getTransactionsByAccountId(Integer id);
+
+	boolean deleteTransactionsByAccountId(Integer id);
 }

@@ -68,7 +68,7 @@ public class AccountServiceImpl implements AccountService {
 				return false;
 			}
 		}
-
+		tdao.deleteTransactionsByAccountId(account.getId());
 		uadao.removeAccount(account.getId());
 		adao.deleteAccountById(account.getId());
 		return true;
@@ -78,9 +78,10 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Transaction addFunds(Account account, Transaction t) {
 		account.setBalance(account.getBalance() + t.getAmount());
-		adao.updateAccount(account);
-		t.setFromAccount(1);
+		t.setFromAccount(account.getId());
+		t.setToAccount(account.getId());
 		tdao.createTransaction(t);
+		adao.updateAccount(account);
 		return t;
 	}
 
@@ -93,9 +94,9 @@ public class AccountServiceImpl implements AccountService {
 			throw new InsufficientFundsException();
 		from.setBalance(newBalance);
 		to.setBalance(to.getBalance() + t.getAmount());
+		tdao.createTransaction(t);
 		adao.updateAccount(from);
 		adao.updateAccount(to);
-		tdao.createTransaction(t);
 		return t;
 	}
 

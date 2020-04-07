@@ -1,7 +1,9 @@
 package codes.newell.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import codes.newell.entities.Account;
@@ -11,23 +13,21 @@ import codes.newell.services.AccountService;
 import codes.newell.services.AccountServiceImpl;
 import codes.newell.services.TransactionLog;
 import codes.newell.services.TransactionLogImpl;
+import codes.newell.utilities.InsufficientFundsException;
 import codes.newell.utilities.UiBuilder;
 import codes.newell.utilities.UiPair;
 
 public class UserUi {
 	static User user;
 
-	static AccountService as = new AccountServiceImpl();
+	static AccountService acc = new AccountServiceImpl();
 	static TransactionLog tl = new TransactionLogImpl();
 
 	static List<UiPair> menu = new ArrayList<>();
 	static {
-		UiPair option1 = new UiPair("Create Bank Account", UserUi::createBankAccount);
-		UiPair option2 = new UiPair("Manage Accounts", UserUi::manageAccounts);
-		UiPair option3 = new UiPair("View User Transactions", UserUi::listTransactionsByUser);
-		menu.add(option1);
-		menu.add(option2);
-		menu.add(option3);
+		menu.add(new UiPair("Create Bank Account", UserUi::createBankAccount));
+		menu.add(new UiPair("Manage Accounts", UserUi::manageAccounts));
+		menu.add(new UiPair("View User Transactions", UserUi::listTransactionsByUser));
 	}
 
 	public static void main() {
@@ -36,7 +36,7 @@ public class UserUi {
 
 	static void createBankAccount() {
 		Scanner s = UiBuilder.getScanner();
-		List<Account> accounts = as.getAccountsByUserId(user.getId());
+		List<Account> accounts = acc.getAccountsByUserId(user.getId());
 		Account account = new Account();
 
 		String name;
@@ -57,14 +57,17 @@ public class UserUi {
 		s.nextLine();
 		account.setNickname(name);
 		account.setBalance(balance);
-		as.openAccount(user, account);
+		acc.openAccount(user, account);
+		System.out.println("Your account has been created.");
 	}
 
 	static void manageAccounts() {
-		List<Account> accounts = as.getAccountsByUserId(user.getId());
-		for (Account n : accounts) {
-			System.out.printf("%s: $%.2f\n", n.getNickname(), n.getBalance());
-		}
+		List<UiPair> menu = new ArrayList<>();
+		menu.add(new UiPair("View Account Balances", UserUi::displayBalances));
+		menu.add(new UiPair("View Transactions by Account", UserUi::listTransactionsByAccount));
+		menu.add(new UiPair("Deposit Funds", UserUi::depositFunds));
+		menu.add(new UiPair("Withdraw Funds", UserUi::withdrawFunds));
+		UiBuilder.executeMenu(menu);
 	}
 
 	static void listTransactionsByUser() {
@@ -72,5 +75,74 @@ public class UserUi {
 		for (Transaction t : log) {
 			System.out.println(t.toString());
 		}
+	}
+
+	static void listTransactionsByAccount() {
+		Account account = selectAccount();
+		List<Transaction> log = tl.getTransactionsByAccountId(account.getId());
+		for (Transaction t : log) {
+			System.out.println(t.toString());
+		}
+	}
+
+	static void displayBalances() {
+		List<Account> accounts = acc.getAccountsByUserId(user.getId());
+		System.out.println("Accounts:");
+		for (Account n : accounts) {
+			System.out.printf("%-10s $%.2f\n", n.getNickname(), n.getBalance());
+		}
+	}
+
+	static Account selectAccount() {
+		List<Account> accounts = acc.getAccountsByUserId(user.getId());
+		Map<String, Account> map = new HashMap<>();
+		System.out.println("Write an account name then press enter:");
+		for (Account a : accounts) {
+			map.put(a.getNickname(), a);
+			System.out.printf("%-10s $%.2f\n", a.getNickname(), a.getBalance());
+		}
+		Scanner input = UiBuilder.getScanner();
+		String key = input.nextLine();
+		return map.get(key);
+	}
+
+	static void depositFunds() {
+		Account account = selectAccount();
+		System.out.println(account.toString());
+		System.out.println("How much would you like to deposit?");
+		Scanner input = UiBuilder.getScanner();
+		double amount = input.nextDouble();
+		input.nextLine();
+		Transaction t = new Transaction();
+		t.setAmount(amount);
+		t.setUser(user.getId());
+		System.out.println("Add a transaction message: ");
+		t.setMessage(input.nextLine());
+		acc.addFunds(account, t);
+		System.out.println("Your funds have been added!");
+	}
+
+	static void withdrawFunds() {
+		Account account = selectAccount();
+		System.out.println("How much would you like to withdraw?");
+		Scanner input = UiBuilder.getScanner();
+		double amount = input.nextDouble();
+		input.nextLine();
+		Transaction t = new Transaction();
+		t.setAmount(amount);
+		t.setFromAccount(account.getId());
+		t.setToAccount(1);
+		t.setUser(user.getId());
+		System.out.println("Add a transaction message: ");
+		t.setMessage(input.nextLine());
+		try {
+			acc.withdrawFunds(account, t);
+			System.out.println("Your funds have been withdrawn.");
+		} catch (InsufficientFundsException e) {
+			System.out.println("Could not transact, insufficient funds");
+		}
+	}
+
+	static void transferFunds() {
 	}
 }

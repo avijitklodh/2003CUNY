@@ -19,4 +19,9 @@ public class TransactionLogImpl implements TransactionLog {
 		return tdao.getTransactionsByAccountId(id);
 	}
 
+	@Override
+	public boolean deleteTransactionsByAccountId(Integer id) {
+		return tdao.deleteTransactionsByAccountId(id);
+	}
+
 }

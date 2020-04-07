@@ -24,6 +24,7 @@ public class LogInUi {
 		udao.getUserByUsernameAndPassword(user);
 		if (user.getId() > 0) {
 			UserUi.user = user;
+			System.out.println("You have been logged in!");
 			if (user.getAdminStatus()) {
 				AdminUi.main();
 			} else {

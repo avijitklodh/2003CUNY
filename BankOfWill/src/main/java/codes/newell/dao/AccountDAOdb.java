@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import codes.newell.entities.Account;
-import codes.newell.entities.User;
 import codes.newell.utilities.ConnectionFactory;
 import codes.newell.utilities.ConnectionManager;
 import codes.newell.utilities.QueryBuilder;
@@ -84,7 +83,7 @@ public class AccountDAOdb implements AccountDAO {
 	@Override
 	public Account createAccount(Account account) {
 		// (first_name, last_name, username, password_hash, is_super)
-		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.CREATE);
+		QueryBuilder<Account> qb = new QueryBuilder<>(account, QueryBuilder.CREATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(account.getBalance());
@@ -106,11 +105,12 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public Account updateAccount(Account account) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.UPDATE);
+		QueryBuilder<Account> qb = new QueryBuilder<>(account, QueryBuilder.UPDATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(account.getBalance());
 		params.add(account.getNickname());
+		params.add(account.getId());
 		try {
 			ResultSet rs = cm.executeWithParameters(params);
 			rs.next();
@@ -128,7 +128,7 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public boolean deleteAccountById(Integer id) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.DELETE);
+		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.DELETE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		try {
 			cm.executeWithParameter(id);

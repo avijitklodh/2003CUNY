@@ -186,4 +186,24 @@ public class UserDAOdb implements UserDAO {
 		return user;
 	}
 
+	@Override
+	public User getUserByUsername(String username) {
+		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.SELECT_WHERE);
+		qb.customWhereClause("where username = ?");
+
+		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
+		try {
+			ResultSet rs = cm.executeWithParameter(username);
+			rs.next();
+			return buildUser(rs);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
