@@ -9,21 +9,15 @@ import codes.newell.utilities.InsufficientFundsException;
 
 public interface AccountService {
 
-	Account openAccount(User user);
+	Account openAccount(User user, Account account);
 
-	Account openAccount(User user, double amount);
+	List<Account> getAccountsByUserId(Integer i);
 
-	Account getAccountById(String id);
+	Transaction addFunds(Account account, Transaction transaction);
 
-	List<Account> getAccountsByUserId(String id);
-
-	Transaction addFunds(Account account, double amount);
-
-	Transaction withdrawFunds(Account account, double amount) throws InsufficientFundsException;
+	Transaction withdrawFunds(Account account, Transaction transaction) throws InsufficientFundsException;
 
 	Transaction transferFunds(Transaction transaction) throws InsufficientFundsException;
 
-	Account removeUserFromAccount(User user, Account account);
-
-	boolean closeAccount(Account account);
+	boolean closeAccount(Account account, User user);
 }

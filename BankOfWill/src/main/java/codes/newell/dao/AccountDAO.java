@@ -10,7 +10,7 @@ public interface AccountDAO {
 
 	List<Account> getAllAccounts();
 
-	List<Account> getAllAccountsByUserId(Integer id);
+	List<Account> getAccountsByUserId(Integer id);
 
 	Account createAccount(Account account);
 

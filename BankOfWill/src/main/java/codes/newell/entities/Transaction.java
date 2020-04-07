@@ -6,10 +6,10 @@ public class Transaction {
 	private int id;
 	private double amount;
 	private String message;
-	private LocalDateTime t_date = LocalDateTime.now();
+	private String t_date = LocalDateTime.now().toString();
 	private int from_account;
 	private int to_account;
-	private int customer_id;
+	private int user_id;
 
 	public Transaction() {
 	}
@@ -35,11 +35,11 @@ public class Transaction {
 		this.message = message;
 	}
 
-	public LocalDateTime getDate() {
+	public String getDate() {
 		return t_date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(String date) {
 		this.t_date = date;
 	}
 
@@ -68,17 +68,17 @@ public class Transaction {
 	}
 
 	public int getUser() {
-		return customer_id;
+		return user_id;
 	}
 
-	public void setUser(int user) {
-		this.customer_id = user;
+	public void setUser(int id) {
+		this.user_id = id;
 	}
 
 	@Override
 	public String toString() {
 		return "Transaction [id=" + id + ", amount=" + amount + ", message=" + message + ", date=" + t_date
-				+ ", fromAccount=" + from_account + ", toAccount=" + to_account + ", user=" + customer_id + "]";
+				+ ", fromAccount=" + from_account + ", toAccount=" + to_account + ", user=" + id + "]";
 	}
 
 }

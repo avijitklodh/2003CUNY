@@ -57,7 +57,7 @@ public class AccountDAOdb implements AccountDAO {
 	}
 
 	@Override
-	public List<Account> getAllAccountsByUserId(Integer id) {
+	public List<Account> getAccountsByUserId(Integer id) {
 		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("inner join user_account on id = account_id and user_id = ?");
 

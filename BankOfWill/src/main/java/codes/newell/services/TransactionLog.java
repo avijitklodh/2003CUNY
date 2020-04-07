@@ -5,9 +5,8 @@ import java.util.List;
 import codes.newell.entities.Transaction;
 
 public interface TransactionLog {
-	List<Transaction> getTransactionsByUserId(String id);
+	List<Transaction> getTransactionsByUserId(Integer id);
 
-	List<Transaction> getTransactionsByAccountId(String id);
+	List<Transaction> getTransactionsByAccountId(Integer id);
 
-	Transaction addTransaction(Transaction transaction);
 }

@@ -12,7 +12,7 @@ public interface UserDAO {
 
 	List<User> getAllUsers();
 
-	List<User> getAllUsersByAccountId(Integer id);
+	List<User> getUsersByAccountId(Integer id);
 
 	User createUser(User user);
 

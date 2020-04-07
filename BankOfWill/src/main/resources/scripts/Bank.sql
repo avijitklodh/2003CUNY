@@ -20,9 +20,9 @@ create table user_account (
 	primary key	(user_id, account_id)
 );
 
-create table transaction_log (
+create table "transaction" (
 	id 				serial primary key,
-	t_date			timestamp default current_timestamp,
+	t_date			varchar(200),
 	amount			double precision not null,
 	message			varchar,
 	to_account		serial references account(id),
@@ -32,7 +32,7 @@ create table transaction_log (
 );
 
 
-drop table transaction_log;
+drop table "transaction";
 drop table user_account cascade;
 drop table account cascade;
 drop table "user" cascade;
