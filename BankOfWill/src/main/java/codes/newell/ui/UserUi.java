@@ -20,15 +20,17 @@ public class UserUi {
 	static AccountService as = new AccountServiceImpl();
 	static TransactionLog tl = new TransactionLogImpl();
 
-	public static void main() {
-		List<UiPair> menu = new ArrayList<>();
+	static List<UiPair> menu = new ArrayList<>();
+	static {
 		UiPair option1 = new UiPair("Create Bank Account", UserUi::createBankAccount);
 		UiPair option2 = new UiPair("Manage Accounts", UserUi::manageAccounts);
 		UiPair option3 = new UiPair("View User Transactions", UserUi::listTransactionsByUser);
 		menu.add(option1);
 		menu.add(option2);
 		menu.add(option3);
+	}
 
+	public static void main() {
 		UiBuilder.executeMenu(menu);
 	}
 
@@ -63,7 +65,6 @@ public class UserUi {
 		for (Account n : accounts) {
 			System.out.printf("%s: $%.2f\n", n.getNickname(), n.getBalance());
 		}
-		// TODO: build account menu
 	}
 
 	static void listTransactionsByUser() {

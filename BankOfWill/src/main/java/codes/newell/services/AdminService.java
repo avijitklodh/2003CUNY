@@ -7,13 +7,13 @@ import codes.newell.entities.User;
 public interface AdminService {
 	List<User> getAllUsers();
 
-	List<User> getUsersByAccountId(String id);
+	List<User> getUsersByAccountId(Integer id);
 
-	User getUserById(String id);
+	User getUserById(Integer id);
 
 	User createUser(User user);
 
 	User updateUser(User user);
 
-	boolean deleteUser(User user);
+	boolean deleteUserById(Integer id);
 }
