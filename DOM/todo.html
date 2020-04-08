@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-do List</title>
+
+</head>
+
+<body>
+    <h1>To-do list</h1>
+
+    <h3>Please add a task</h3>
+    <input id="taskInput" type="text" placeholder = "task">
+    <button id="taskBtn"  >Add task</button>
+
+    <ol id="taskList">
+    </ol>
+
+</body>
+
+<script>
+    document.getElementById("taskBtn").addEventListener("click",addTask)
+
+    let tasks = []
+
+    function addTask(){
+        alert("Added Task");
+        let taskInput = document.getElementById("taskInput");
+        let task = taskInput.value;
+        tasks.push(task);
+     
+        // generates some html to be inserted into my list
+        let taskList = document.getElementById("taskList");
+        taskList.innerHTML = taskList.innerHTML + `<li> ${task} </li>`;
+    }
+
+</script>
+
+
+</html>
