@@ -11,6 +11,8 @@ import codes.newell.entities.Transaction;
 import codes.newell.entities.User;
 import codes.newell.services.AccountService;
 import codes.newell.services.AccountServiceImpl;
+import codes.newell.services.AdminService;
+import codes.newell.services.AdminServiceImpl;
 import codes.newell.services.TransactionLog;
 import codes.newell.services.TransactionLogImpl;
 import codes.newell.utilities.InsufficientFundsException;
@@ -20,6 +22,7 @@ import codes.newell.utilities.UiPair;
 public class UserUi {
 	static User user;
 
+	static AdminService admin = new AdminServiceImpl();
 	static AccountService acc = new AccountServiceImpl();
 	static TransactionLog tl = new TransactionLogImpl();
 
@@ -72,16 +75,20 @@ public class UserUi {
 
 	static void listTransactionsByUser() {
 		List<Transaction> log = tl.getTransactionsByUserId(user.getId());
+		System.out.printf("|%12s|%12s|%12s|\n", "from", "to", "user");
+		System.out.println("________________________________________");
 		for (Transaction t : log) {
-			System.out.println(t.toString());
+			UserUi.printTransaction(t);
 		}
 	}
 
 	static void listTransactionsByAccount() {
 		Account account = selectAccount();
 		List<Transaction> log = tl.getTransactionsByAccountId(account.getId());
+		System.out.println("________________________________________");
+		System.out.printf("|%12s|%12s|%12s|\n", "from", "to", "user");
 		for (Transaction t : log) {
-			System.out.println(t.toString());
+			UserUi.printTransaction(t);
 		}
 	}
 
@@ -143,6 +150,13 @@ public class UserUi {
 		}
 	}
 
-	static void transferFunds() {
+	static void printTransaction(Transaction t) {
+		// amount date from, to, submitted by message
+		User user = admin.getUserById(t.getUser());
+		Account from = acc.getAccountById(t.getFromAccount());
+		Account to = acc.getAccountById(t.getToAccount());
+		System.out.printf("|%12s|%12s|%12s| on %s\n", from.getNickname(), to.getNickname(), user.getName(),
+				t.getDate());
+		System.out.printf("Transaction Message: %s\n\n", t.getMessage());
 	}
 }

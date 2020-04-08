@@ -105,4 +105,9 @@ public class AccountServiceImpl implements AccountService {
 		return adao.getAccountsByUserId(id);
 	}
 
+	@Override
+	public Account getAccountById(Integer id) {
+		return adao.getAccountById(id);
+	}
+
 }

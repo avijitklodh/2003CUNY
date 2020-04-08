@@ -11,7 +11,9 @@ public interface AccountService {
 
 	Account openAccount(User user, Account account);
 
-	List<Account> getAccountsByUserId(Integer i);
+	Account getAccountById(Integer id);
+
+	List<Account> getAccountsByUserId(Integer id);
 
 	Transaction addFunds(Account account, Transaction transaction);
 

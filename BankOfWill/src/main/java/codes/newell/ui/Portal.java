@@ -12,10 +12,8 @@ public class Portal {
 		System.out.println("Welcome to bank of Will!");
 
 		List<UiPair> menu = new ArrayList<>();
-		UiPair option1 = new UiPair("Log In", LogInUi::main);
-		UiPair option2 = new UiPair("Create Account", CreateAccountUi::main);
-		menu.add(option1);
-		menu.add(option2);
+		menu.add(new UiPair("Log In", LogInUi::main));
+		menu.add(new UiPair("Create Account", CreateAccountUi::main));
 
 		UiBuilder.executeMenu(menu);
 
