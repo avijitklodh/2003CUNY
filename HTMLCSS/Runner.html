@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dombasics</title>
+</head>
+
+<body>
+
+    <h1> Hi Everyone </h1>
+    <button id="btn1">Click</button>
+
+</body>
+<script>
+    let btnname = document.getElementById("btn1");
+    btnname.addEventListener("click", ChangeBodyColor);
+    let change = 0;
+    function ChangeBodyColor() {
+        
+            if (change == 0) {
+            btnname.innerText = 'Wael come >>>> ';
+                change = 1;
+                btnname.setAttribute(position.x,8);
+            }
+            else 
+            {
+                change =0;
+                btnname.innerText = '<<<< Wael back ';
+            }
+           
+        let x = 8;
+        btnname.setAttribute('width', x);
+
+
+    }
+
+
+</script>
+
+</html>

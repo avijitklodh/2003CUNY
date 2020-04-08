@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style> 
+    .div1 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: relative;
+      animation-name: example;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+    .div2{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: relative;
+      animation-name: example2;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+    
+    @keyframes example {
+     100%   {background-color:red; left:0px; top:0px;}
+     25%  {background-color:yellow; left:200px; top:0px;}
+    0%  {background-color:blue; left:200px; top:200px;}
+      25%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+    }
+    
+    @keyframes example2 {
+    0%   {background-color:red; left:0px; top:0px;}
+     75%  {background-color:yellow; left:200px; top:0px;}
+    25%  {background-color:blue; left:200px; top:200px;}
+     75%  {background-color:green; left:0px; top:200px;}
+    0% {background-color:red; left:0px; top:0px;}
+    }
+    </style>
+<style> 
+div {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  animation-name: example3;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.divRY {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: example3;
+  animation-duration: 5s;
+}
+
+@keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+ 
+}
+.divGB {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: example3;
+  animation-duration: 6s;
+  animation-delay: -2s;
+}
+
+@keyframes example {
+  from {background-color:green;}
+  to {background-color: blue;}
+  
+ 
+}
+@keyframes example3 {
+  0%   {background-color:springgreen; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;}
+}
+.divWO {
+  width: 100px;
+  height: 100px;
+  background-color: orangered;
+  animation-name: example3;
+  animation-duration: 1s;
+}
+
+@keyframes example1 {
+  from {background-color:whitesmoke;}
+  to {background-color: tomato;}
+ 
+}
+.divPV {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: example3;
+  animation-duration:8s;
+  animation-delay: -2s;
+}
+
+@keyframes example2 {
+  from {background-color:violet;}
+  to {background-color: #50f0f0;}
+ 
+}
+
+td{
+      border-radius: 10%;
+      border:2;
+  }
+</style>
+</head>
+<body>
+
+ <Table>
+     <tr>
+         <td><div class="divRY"></div></td>
+         <td><div class="div2"></div></td>
+         <td><div class="divPV"></div></td>
+     </tr>
+     <tr>
+        
+        <td><div class="div2"></div></td>
+        <td><div class="divRY"></div></td>
+        <td><div class="divGB"></div></td>
+    </tr>
+    <tr>
+        <td><div class="div1"></div></td>
+        <td><div class="divRY"></div></td>
+        <td><div class="divWO"></div></td>
+    </tr>
+ </Table>
+
+
+
+ 
+
+</body>
+</html>
