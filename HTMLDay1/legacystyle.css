@@ -1,0 +1,28 @@
+.centered
+{
+  text-align: center;
+}
+
+body{
+  background-color: blue;
+}
+
+h1{
+  color: purple;
+}
+
+p{
+  color: white;
+}
+
+td{
+  color: white;
+}
+
+h6{
+  color: gray;
+}
+
+.Highlights{
+  color:  yellow;
+}
