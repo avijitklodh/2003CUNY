@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <button onclick="getPokemon()">Get That Pokemon!!!</button>
+    
+</body>
+<script>
+
+    function print(something){
+        console.log(something)
+    }
+
+    // function getPokemon(){
+    //     // will create a http request to this url
+    //     // Promise is an object that will EVENTUALLY have a value
+    //     // However intitally a promise is pending/unresolved
+    //     let httpResponsePromise =  fetch("https://pokeapi.co/api/v2/pokemon/jigglypuff/");
+        
+    //     // . then is an instruction saying what to do when you actually get the information
+    //     // Tells the browser what code to run when it gets the information
+
+    //     httpResponsePromise.then(
+    //         (httpResponse)=>{console.log(httpResponse); 
+    //             return httpResponse.json()})
+    //         .then((body) =>{console.log(body)});
+
+    // }
+
+    // async means you can promises in this chunk of code that you can wait for
+    async function getPokemon(){
+
+        // await will force JS to wait until the promise is completed
+        let httpResponse = await fetch("https://pokeapi.co/api/v2/pokemon/jigglypuff/");
+       // open 
+       // send
+       
+        let body = await httpResponse.json();
+        // ready state = 4 you have downloded all the information
+
+        // body is an object
+        console.log(body)
+    }
+
+</script>
+
+</html>

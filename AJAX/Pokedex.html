@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+    <title>Pokedex</title>
+</head>
+<body>
+    <h1>Pokedex search for a pokeman!!</h1>  
+    <button onclick="getPokemon()">Get Pokeman</button> 
+    
+    <table>
+        <tr><th>id</th><th>name</th><th>type</th></tr>
+        <tr id="pokeData"></tr>
+    </table>
+
+    <img id="pokeImage" src="" alt="pokeman will go here">
+</body>
+
+<script>
+
+    function getPokemon(){
+        // to make http requests you use XMLHttpRequest object
+        let xhttp = new XMLHttpRequest();
+        // You tell the browser what to do
+        // Your browser can do multiple things at once
+        // JS is single threaded and can only do one thing at a time
+        
+        // Function that says what to do when you get your http response
+        // this function DOES NOT EXECUTE IMMEDIATELY!!!!!!!!
+        xhttp.onreadystatechange = function(){
+            // this refers to the xhttp request object
+            if(this.readyState === 4 && this.status === 200){
+                let pokemon = JSON.parse(this.responseText);
+                
+                document.getElementById("pokeData").innerHTML = 
+`<td>${pokemon.id}</td> <td> ${pokemon.name} </td> <td> ${pokemon.types[0].type.name} </td>` ;
+            let image = document.getElementById("pokeImage");
+            image.src= pokemon.sprites.front_shiny;
+}
+        }
+
+        // addresses the envelope
+        xhttp.open("GET", "https://pokeapi.co/api/v2/pokemon/jigglypuff/")
+        // actually sends your request
+        xhttp.send();
+
+    }
+
+</script>
+</html>

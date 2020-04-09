@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DOM basics</title>
+    <!-- DOM Document Object Model
+    tree diagram of the relationships between you html elements
+    
+    JS was initially created to be able to edit the DOM
+    This makes webpages dynamic
+    i.e. you perform some sort of action and the web page is altered-->
+
+</head>
+
+<body>
+    <h1 id="greeting" style="color: aquamarine;">Hello Everyone!!!</h1>
+    <button onclick="toSpanish()">Spanish</button>
+    <button id="frenchButton">French</button>
+</body>
+
+<script>
+
+    let frbtn = document.getElementById("frenchButton");
+    // event handler        event, handler function
+    // event is what you are listening for 
+    //the handler function is what to do when that happens
+    // saying what function to run not actually running that function
+    frbtn.addEventListener("click",toFrench);
+
+
+    // functions that maniuplate the dom tend to not return anything
+    // they just DO something
+    // JS is a scripting language it tells the browser what to do
+    // You can run chunks of it at a time
+    function toSpanish(){
+        let greet = document.getElementById("greeting") // returns an element object;
+        greet.style = "color: blue";
+        greet.innerHTML = "Hola Todos";
+    }
+
+    function toFrench(){
+        let greet = document.getElementById("greeting");
+        greet.style = "color: red";
+        greet.innerHTML = "Bonjour toutes les personnes";
+    }
+    
+
+
+</script>
+
+</html>

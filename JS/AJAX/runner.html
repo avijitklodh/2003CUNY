@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<body>
+    <h1 id="info"></h1>
+</body>
+<script>
+
+// JSON JavaScript Object Notation
+// IT IS JUST A FORMATTED STRING!!!!!
+// Uniform format for sending information bewteen computers
+// JSON DO NOT contain functions
+let adam = { name:"Adam Ranieri", 
+profession:"Trainer", 
+age:19, 
+sayHello: function(){
+    console.log("Hello");
+}
+
+}; // JavaScript Object 
+let json = JSON.stringify(adam); // returns a STRING in the JSON format
+
+
+
+console.log(adam);
+console.log(json);
+
+// all the keys are in quotes
+// string values get quotes number values do not
+let bowserjson = '{"character": "Bowser", "series": "Mario", "appearances" : 40, "enemies": ["Mario","Luigi","Toad"]}';
+let bowser = JSON.parse(bowserjson);
+
+
+console.log(bowser.enemies[1]);
+console.log(bowserjson);
+
+document.getElementById("info").innerHTML = json;
+</script>
+
+</html>
