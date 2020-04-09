@@ -31,31 +31,45 @@ public class AccountTransDAOmaria {
 			// TransTypeId,TransAmount, AmountBefore, TransDate, Comment) VALUES(0, NULL,
 			// NULL, 0, 0,NULL, NULL);
 
-			AccountTransaction accTrans = null;
-
 			try (Connection con = DBConnectionUtil.openCon();
 					PreparedStatement ps = con.prepareStatement(
 							"INSERT INTO banksysdb.tbl_accountTransaction (AccountId, TransTypeId, TransAmount, AmountBefore) VALUES(?, ?, ?, ?)",
-							Statement.RETURN_GENERATED_KEYS);) {
-				ps.setInt(1, accTrans.getAccount().getId());
-				ps.setInt(2, accTrans.getTransType().getId());
-				ps.setInt(3, (int) accTrans.getTransAmount());
-				ps.setInt(4, (int) accTrans.getAmountBefore());
-				//ps.setDate(5, (Date) accTrans.getTransDate());
-				//ps.setString(6, accTrans.getComment());
-				ps.execute();
-				ResultSet rs = ps.getGeneratedKeys();
-				rs.next();// gets first record
-				int key = rs.getInt("ID");
-				accTrans.setId(key);
-				con.close();
+							Statement.RETURN_GENERATED_KEYS);
+					PreparedStatement statement = con
+							.prepareStatement("UPDATE banksysdb.tbl_userAccount SET CurrentBalance= ? WHERE ID= ? ");) {
+				try {
+					ps.setInt(1, transObj.getAccount().getId());
+					ps.setInt(2, transObj.getTransType().getId());
+					ps.setInt(3, (int) transObj.getTransAmount());
+					ps.setInt(4, (int) transObj.getAmountBefore());
+					// ps.setDate(5, (Date) accTrans.getTransDate());
+					// ps.setString(6, accTrans.getComment());
+					ps.executeUpdate();
+					ResultSet rs = ps.getGeneratedKeys();
+					rs.next();// gets first record
+					int key = rs.getInt("ID");
+					transObj.setId(key);
+					float AmountAfter = transObj.getTransType().getId() == 1
+							? transObj.getTransAmount() + transObj.getAmountBefore()
+							: transObj.getAmountBefore() - transObj.getTransAmount();
+					statement.setFloat(1, AmountAfter);
+					statement.setInt(2, transObj.getAccount().getId());
+					statement.executeUpdate();
+					con.commit();
+					ps.close();
+					statement.close();
+					con.close();
+
+				} catch (SQLException e) {
+					con.rollback();
+				}
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 
 			}
-			return accTrans;
+			return transObj;
 		}
 
 		@Override
@@ -64,9 +78,9 @@ public class AccountTransDAOmaria {
 			// SELECT ID, AccountId, TransTypeId, TransAmount, AmountBefore, TransDate,
 			// Comment FROM banksysdb.tbl_accountTransaction;
 			AccountTransCollection<AccountTransaction> tansCollection = new AccountTransCollection<AccountTransaction>();
-			AccountTransaction accTrans = null;
-			UserAccount userAcount = null;
-			TransactionType transType = null;
+			AccountTransaction accTrans = new AccountTransaction();
+			UserAccount userAcount = new UserAccount();
+			TransactionType transType = new TransactionType();
 			try (Connection con = DBConnectionUtil.openCon();
 					PreparedStatement ps = con.prepareStatement(
 							"SELECT * from tbl_accountTransaction tat where tat.AccountId  in (SELECT ID from tbl_userAccount tua where tua.UserId = ?)");) {

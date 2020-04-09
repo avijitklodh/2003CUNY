@@ -2,6 +2,8 @@ package dev.wsd.entities;
 
 import java.util.Date;
 
+import dev.wsd.utils.PrintUtil;
+
 /**
  * @author Admin
  * @version 1.0
@@ -11,13 +13,13 @@ public class AccountTransaction {
 
 	private int id;
 	private UserAccount account;
-	private TransactionType transType ;
+	private TransactionType transType;
 	private float transAmount;
 	private float amountBefore;
 	private Date transDate;
 	private String Comment;
 
-	public AccountTransaction(){
+	public AccountTransaction() {
 
 	}
 
@@ -77,6 +79,25 @@ public class AccountTransaction {
 		Comment = comment;
 	}
 
- 
-	 
+	public void printOptions() {
+		if (this != null) {
+			PrintUtil.drawHyphenLn();
+			PrintUtil.printLine("Your  Account Transaction(s) Summary  :");
+			PrintUtil.drawHyphenLn();
+
+			float AmountAfter = 0;
+			PrintUtil.printLine("[ Account Num: " + this.getAccount().getAccountNum() + "| Account Type: "
+					+ this.getAccount().getAccountType().getTypeName() + "| Transaction Type: "
+					+ this.getTransType().getTransName() + "| Transaction Date:" + this.getTransDate() + "]");
+
+			PrintUtil.printLine("[ Balance Before: " + this.getAmountBefore() + "| Tansaction Amount: "
+					+ this.getTransAmount() + "| Balance After: "
+					+ (AmountAfter = this.getTransType().getId() == 1 ? this.getTransAmount() + this.getAmountBefore()
+							: this.getAmountBefore() - this.getTransAmount())
+					+ " ].");
+			PrintUtil.drawHyphenLn();
+
+		}
+	}
+
 }

@@ -10,6 +10,7 @@ import java.util.logging.ConsoleHandler;
 
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
+import dev.wsd.collections.AccountTransCollection;
 import dev.wsd.collections.AccountTypeCollection;
 import dev.wsd.collections.TransTypeCollection;
 import dev.wsd.collections.UserAccountCollection;
@@ -63,6 +64,27 @@ public class Main {
 			boolean tryToLogin = true;
 			try {
 				switch (userInput) {
+				case "3":
+					PrintUtil.printLine("New User Registration ");
+					PrintUtil.drawEqualLn();
+					User newuser = new User();
+					try {
+						PrintUtil.printLine("Enter Fisrt Name  value  : ");
+						String fni = sc.nextLine();
+						PrintUtil.printLine("Enter Last Name  value  : ");
+						String lni = sc.nextLine();
+						PrintUtil.printLine("Enter Email  value  : ");
+						String emi = sc.nextLine();
+						newuser.setEmail(emi);
+						newuser.setFname(fni);
+						newuser.setLname(lni);
+						newuser.setAdmin(false);
+					} catch (Exception e) {
+					}
+					AdminService.AdminServiceOperation.createUser(newuser);
+					// AdminService.AdminServiceOperation.getAllUsers().printOptions();
+
+					break;
 				case "1":
 				case "2":
 					int itr = 0;
@@ -76,9 +98,9 @@ public class Main {
 
 						PrintUtil.printLine("Password: ");
 						pass = sc.nextLine();
-						 ValidateCredentials(usrname, pass);
+						ValidateCredentials(usrname, pass);
 
-						if (ClientService.CurrentUserCredential  == null) {
+						if (ClientService.CurrentUserCredential == null) {
 
 							if (itr <= 5) {
 								PrintUtil.printLine("Worng Username OR Password ,Invalid Try Num# " + itr + " Of 5");
@@ -91,16 +113,17 @@ public class Main {
 							}
 
 						} else {
-							if (ClientService.CurrentUserCredential .getUser() != null && (ClientService.CurrentUserCredential .getUser().getId() > 0 && itr <= 5)) {
+							if (ClientService.CurrentUserCredential.getUser() != null
+									&& (ClientService.CurrentUserCredential.getUser().getId() > 0 && itr <= 5)) {
 								break;
-							} else if (ClientService.CurrentUserCredential .getUser() == null
-									|| (ClientService.CurrentUserCredential .getUser().getId() <= 0 && itr <= 5)) {
+							} else if (ClientService.CurrentUserCredential.getUser() == null
+									|| (ClientService.CurrentUserCredential.getUser().getId() <= 0 && itr <= 5)) {
 								PrintUtil.printLine("Worng Username Or Password , Try Num# " + itr + " Of 5");
 								continue;
-							} else if (ClientService.CurrentUserCredential .getUser() == null
-									|| (ClientService.CurrentUserCredential .getUser().getId() <= 0 && itr >= 5)) {
+							} else if (ClientService.CurrentUserCredential.getUser() == null
+									|| (ClientService.CurrentUserCredential.getUser().getId() <= 0 && itr >= 5)) {
 
-								//ClientService.CurrentUserCredential  = null;
+								// ClientService.CurrentUserCredential = null;
 								tryToLogin = false;
 								// exit = "exit";
 								break;
@@ -110,17 +133,21 @@ public class Main {
 
 					}
 					boolean UserIsLogged = true;
-					User user = null;
+					User user = new User();
 					while (UserIsLogged) {
-						if (ClientService.CurrentUserCredential  != null && ClientService.CurrentUserCredential .getUser() != null && ClientService.CurrentUserCredential .getUser().isAdmin()) {
-							PrintUtil.printLine("Welcome Back " + ClientService.CurrentUserCredential .getUser().getFname()
-									+ ClientService.CurrentUserCredential .getUser().getLname() + " | Your last login was in: "
-									+ ClientService.CurrentUserCredential .getLastLogin());
+						if (ClientService.CurrentUserCredential != null
+								&& ClientService.CurrentUserCredential.getUser() != null
+								&& ClientService.CurrentUserCredential.getUser().isAdmin()) {
+							PrintUtil.printLine(
+									"Welcome Back " + ClientService.CurrentUserCredential.getUser().getFname()
+											+ ClientService.CurrentUserCredential.getUser().getLname()
+											+ " | Your last login was in: "
+											+ ClientService.CurrentUserCredential.getLastLogin());
 							PrintUtil.drawHyphenLn();
 							PrintUtil.printLine("Administration Operations :");
 							boolean adminbreak = true;
 							String adminoption;
-							while (adminbreak) {
+					//		while (adminbreak) {
 								PrintUtil.printLine(
 										"Enter[4] List users , [5] Create User, [6] Update User, [7] to Delete User ,[exit]To Logout.");
 								PrintUtil.drawEqualLn();
@@ -130,13 +157,14 @@ public class Main {
 								case "exit":
 									ClientService.ClientServiceOperation.logout(currentUser);
 									UserIsLogged = false;
-									break;
+									continue;
 								case "5":
 //									PrintUtil.printLine("Enter User ID ,  Integer Numbe Only : ");
 //									int id = Integer.parseInt(sc.nextLine()) ;
 //									user = UserDAOmaria.UserDAOImplementaion.getUserById(id);
 //									user.printOptions();
 									try {
+										user = new User();
 										PrintUtil.printLine("Enter Fisrt Name  value  : ");
 										String fni = sc.nextLine();
 										PrintUtil.printLine("Enter Last Name  value  : ");
@@ -185,103 +213,126 @@ public class Main {
 									AdminService.AdminServiceOperation.deleteUser(user);
 									AdminService.AdminServiceOperation.getAllUsers().printOptions();
 									continue;
+
 								}
 
-							}
+						//1	}
 
-						} else if (ClientService.CurrentUserCredential  != null && ClientService.CurrentUserCredential .getUser() != null
-								&& !ClientService.CurrentUserCredential .getUser().isAdmin()) {
+						} else if (ClientService.CurrentUserCredential != null
+								&& ClientService.CurrentUserCredential.getUser() != null
+								&& !ClientService.CurrentUserCredential.getUser().isAdmin()) {
 
 							PrintUtil.printLine(
 									"Enter[8] To View your Account(s) Summry , [9] Transactions History , [10] Withdraw, [11] Deposit,");
 							PrintUtil.printLine(
-									"Enter[12] To Open an Account , [13] Close an Account , [14] Edit Your Profile , [exit] To Logout.");
+									"Enter[12] To Open an Account , [13] Close an Account  , [exit] To Logout.");
 							PrintUtil.drawEqualLn();
 							PrintUtil.printLine(">>");
 							String userinoption = sc.nextLine();
 							switch (userinoption) {
 							case "exit":
-								ClientService.ClientServiceOperation.logout(ClientService.CurrentUserCredential );
+								ClientService.ClientServiceOperation.logout(ClientService.CurrentUserCredential);
 								UserIsLogged = false;
 								break;
 							case "8":
-//								PrintUtil.printLine("Enter User ID ,  Integer Numbe Only : ");
-//								int id = Integer.parseInt(sc.nextLine()) ;
-//								user = UserDAOmaria.UserDAOImplementaion.getUserById(id);
-//								user.printOptions();
 
 								ClientService.ClientServiceOperation
-										.getAccountInfoByUserId(ClientService.CurrentUserCredential .getUser().getId()).printOptions();
-								// AdminService.AdminServiceOperation.getAllUsers().printOptions();
+										.getAccountInfoByUserId(ClientService.CurrentUserCredential.getUser().getId())
+										.printOptions();
 
 								continue;
 							case "9":
-//								PrintUtil.printLine("Enter User ID ,  Integer Numbe Only : ");
-//								int id = Integer.parseInt(sc.nextLine()) ;
-//								user = UserDAOmaria.UserDAOImplementaion.getUserById(id);
-//								user.printOptions();
 
-								ClientService.ClientServiceOperation.viewTransaction(ClientService.CurrentUserCredential .getUser().getId())
+								ClientService.ClientServiceOperation
+										.viewTransaction(ClientService.CurrentUserCredential.getUser().getId())
 										.printOptions();
-								// AdminService.AdminServiceOperation.getAllUsers().printOptions();
 
 								continue;
 							case "10":
-								PrintUtil.printLine("Enter The Account Number: ");
-								AccountTransaction at = new AccountTransaction();
 								UserAccountCollection<UserAccount> acco = ClientService.ClientServiceOperation
-										.getAccountInfoByUserId(ClientService.CurrentUserCredential .getUser().getId());
-								acco.printOptions();
-								int acid = sc.nextInt();
-								UserAccount account = new UserAccount();
-								for (UserAccount ac : acco) {
-									if (ac.getId() == acid)
-										account = ac;
-									break;
+										.getAccountInfoByUserId(ClientService.CurrentUserCredential.getUser().getId());
+								if (null == acco || acco.size() <= 0) {
+									PrintUtil.printErrorLine(
+											"There is no open accounts for you , Please select option [12] to open an account");
+
+								} else {
+									PrintUtil.printLine("Enter The Account Number: ");
+
+									acco.printOptions();
+									String acid = sc.next();
+									AccountTransaction at = new AccountTransaction();
+									UserAccount account = new UserAccount();
+
+									if (!acco.stream().filter((b) -> b.getAccountNum().equals(acid)).findFirst()
+											.isPresent())
+										PrintUtil.printErrorLine("Invalid Account number ");
+									else {
+										account = acco.stream().filter((b) -> b.getAccountNum().equals(acid))
+												.findFirst().get();
+										PrintUtil.printLine("Enter Tansaction Amount : ");
+										at.setTransAmount(sc.nextFloat());
+										// int id = Integer.parseInt(sc.nextLine()) ;
+
+										at.setTransAmount(sc.nextFloat());
+
+										if (account.getCurrentBalance() < at.getTransAmount())
+											PrintUtil.printErrorLine("The Entered amount: (" + at.getTransAmount()
+													+ ") is more than the current balance in your account: ("
+													+ account.getCurrentBalance() + ")");
+										else {
+											at.setAmountBefore(account.getCurrentBalance());
+											TransactionType transt = DataService.DataServiceOperation
+													.getTransactionTypeById(2);
+											at.setTransType(transt);
+											at.setAccount(account);
+
+											ClientService.ClientServiceOperation.addTransaction(at);
+
+											ClientService.ClientServiceOperation
+													.viewTransaction(
+															ClientService.CurrentUserCredential.getUser().getId())
+													.printOptions();
+										}
+									}
 								}
-
-								PrintUtil.printLine("Enter Tansaction Amount : ");
-								// int id = Integer.parseInt(sc.nextLine()) ;
-
-								at.setTransAmount(sc.nextFloat());
-								at.setAmountBefore(account.getCurrentBalance());
-								TransactionType transt = DataService.DataServiceOperation.getTransactionTypeById(2);
-								at.setTransType(transt);
-								at.setAccount(account);
-								ClientService.ClientServiceOperation.addTransaction(at);
-
-								ClientService.ClientServiceOperation.viewTransaction(ClientService.CurrentUserCredential .getUser().getId())
-										.printOptions();
-								// AdminService.AdminServiceOperation.getAllUsers().printOptions();
 
 								continue;
 							case "11":
-								PrintUtil.printLine("Enter The Account Number: ");
-								AccountTransaction att = new AccountTransaction();
 								UserAccountCollection<UserAccount> accot = ClientService.ClientServiceOperation
-										.getAccountInfoByUserId(ClientService.CurrentUserCredential .getUser().getId());
-								accot.printOptions();
-								int acidt = sc.nextInt();
-								 
-								UserAccount accountt = new UserAccount();
-								for (UserAccount ac : accot) {
-									if (ac.getId() == acidt)
-										account = ac;
-									break;
+										.getAccountInfoByUserId(ClientService.CurrentUserCredential.getUser().getId());
+								if (null == accot || accot.size() <= 0) {
+									PrintUtil.printErrorLine(
+											"There is no open accounts for you , Please select option [12] to open an account");
+								} else {
+									PrintUtil.printLine("Enter The Account Number: ");
+									accot.printOptions();
+									String acidt = sc.next();
+
+									AccountTransaction att = new AccountTransaction();
+									UserAccount accountt = new UserAccount();
+
+									if (!accot.stream().filter((b) -> b.getAccountNum().equals(acidt)).findFirst()
+											.isPresent())
+										PrintUtil.printErrorLine("Invalid Account number ");
+									else {
+										accountt = accot.stream().filter((b) -> b.getAccountNum().equals(acidt))
+												.findFirst().get();
+										PrintUtil.printLine("Enter Tansaction Amount : ");
+										// int id = Integer.parseInt(sc.nextLine()) ;
+
+										att.setTransAmount(sc.nextFloat());
+										att.setAmountBefore(accountt.getCurrentBalance());
+										TransactionType transtt = DataService.DataServiceOperation
+												.getTransactionTypeById(1);
+										att.setTransType(transtt);
+										att.setAccount(accountt);
+										ClientService.ClientServiceOperation.addTransaction(att);
+										ClientService.ClientServiceOperation
+												.viewTransaction(ClientService.CurrentUserCredential.getUser().getId())
+												.stream().filter((t) -> t.getId() == att.getId()).findFirst().get()
+												.printOptions();
+									}
 								}
-
-								PrintUtil.printLine("Enter Tansaction Amount : ");
-								// int id = Integer.parseInt(sc.nextLine()) ;
-
-								att.setTransAmount(sc.nextFloat());
-								att.setAmountBefore(accountt.getCurrentBalance());
-								TransactionType transtt = DataService.DataServiceOperation.getTransactionTypeById(1);
-								att.setTransType(transtt);
-								att.setAccount(accountt);
-								ClientService.ClientServiceOperation.addTransaction(att);
-
-								ClientService.ClientServiceOperation.viewTransaction(ClientService.CurrentUserCredential .getUser().getId())
-										.printOptions();
 								// AdminService.AdminServiceOperation.getAllUsers().printOptions();
 
 								continue;
@@ -294,48 +345,80 @@ public class Main {
 								UserAccount newaccount = new UserAccount();
 
 								Random rand = new Random();
-								int n = rand.nextInt(1000);
+								int n = rand.nextInt(100);
+								int m = rand.nextInt(100) * n;
 								newaccount.setAccountType(accountType);
 								newaccount.setActive(true);
-								newaccount.setUser(ClientService.CurrentUserCredential .getUser());
-								newaccount.setAccountNum(""+n);
+								newaccount.setUser(ClientService.CurrentUserCredential.getUser());
+								newaccount.setAccountNum("" + m);
 								PrintUtil.printLine("Enter Start Amount: ");
-								int openamount =Integer.parseInt(sc.nextLine());
+								int openamount = Integer.parseInt(sc.nextLine());
 								newaccount.setCurrentBalance(openamount);
 								ClientService.ClientServiceOperation.openAccount(newaccount);
 
-								// int id = Integer.parseInt(sc.nextLine()) ;
-
-								// AdminService.AdminServiceOperation.getAllUsers().printOptions();
+								ClientService.ClientServiceOperation
+										.getAccountInfoByUserId(ClientService.CurrentUserCredential.getUser().getId())
+										.printOptions();
 
 								continue;
+							case "13":
+								UserAccountCollection<UserAccount> accolst = ClientService.ClientServiceOperation
+										.getAccountInfoByUserId(ClientService.CurrentUserCredential.getUser().getId());
+								if (null == accolst || accolst.size() <= 0) {
+									PrintUtil.printErrorLine(
+											"There is no open accounts for you , Please select option [12] to open an account");
+								} else {
+									accolst.printOptions();
+									PrintUtil.printLine("Select the account you want to close");
+									String accountnum = sc.nextLine();
+									UserAccount uerAccount = new UserAccount();
+									if (!accolst.stream().filter((b) -> b.getAccountNum().equals(accountnum))
+											.findFirst().isPresent())
+										PrintUtil.printErrorLine("Invalid Account number ");
+									else {
+										uerAccount = accolst.stream()
+												.filter((b) -> b.getAccountNum().contentEquals(accountnum)).findFirst()
+												.get();
+										AccountTransCollection<AccountTransaction> transcol = ClientService.ClientServiceOperation
+												.viewTransaction(ClientService.CurrentUserCredential.getUser().getId());
+										int xid = uerAccount.getId();
+										boolean buftranscol = transcol.stream()
+												.filter((v) -> v.getAccount().getId() == xid).findFirst().isPresent();
+
+										if (buftranscol) {
+											PrintUtil.printErrorLine(
+													"You can not close this account , as it has the some transations , select [9] to list all transactions");
+											// transcol.printOptions();
+										} else {
+
+											PrintUtil.printWarningLine("Are you sure you want to delete the account #"
+													+ uerAccount.getAccountNum()
+													+ " ? Enter (Y) to Confirm , or any key to Cancel");
+
+											String confirm = sc.nextLine();
+											if (confirm.equals("y") || confirm.equals("Y")) {
+												ClientService.ClientServiceOperation.closeAccount(uerAccount);
+												ClientService.ClientServiceOperation
+														.getAccountInfoByUserId(
+																ClientService.CurrentUserCredential.getUser().getId())
+														.printOptions();
+											}
+
+										}
+									}
+								}
+								continue;
+
 							}
 
 						} else
 							break;
 					}
-				case "3":
-					PrintUtil.printLine("New User Registration ");
-					PrintUtil.drawEqualLn();
-					User newuser = new User();
-					try {
-						PrintUtil.printLine("Enter Fisrt Name  value  : ");
-						String fni = sc.nextLine();
-						PrintUtil.printLine("Enter Last Name  value  : ");
-						String lni = sc.nextLine();
-						PrintUtil.printLine("Enter Email  value  : ");
-						String emi = sc.nextLine();
-						newuser.setEmail(emi);
-						newuser.setFname(fni);
-						newuser.setLname(lni);
-						newuser.setAdmin(false);
-					} catch (Exception e) {
-					}
-					AdminService.AdminServiceOperation.createUser(newuser);
-					// AdminService.AdminServiceOperation.getAllUsers().printOptions();
 
+				case "exit":
+					PrintUtil.printLineMessage("You have Logged out Successfully .");
+					UserIsLogged =false; 
 					break;
-
 				// default:
 				// break;
 				}
@@ -355,7 +438,7 @@ public class Main {
 		;
 		PrintUtil.drawHyphenLn();
 
-		if (null == ClientService.CurrentUserCredential  || exit.equals("exit"))
+		if (null == ClientService.CurrentUserCredential || exit.equals("exit"))
 			PrintUtil.printLineMessage("You have Logged out Successfully .");
 
 //		col = AdminService.AdminServiceOperation.getAllUsers();

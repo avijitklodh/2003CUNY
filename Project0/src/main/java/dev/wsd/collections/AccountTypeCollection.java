@@ -27,7 +27,7 @@ public class AccountTypeCollection<T>  extends ArrayList <AccountType>{
 			for (AccountType tr : this) {
 				PrintUtil.printLine("[" + tr.getId() + "] for " + tr.getTypeName() + " .");
 			}
-			PrintUtil.drawEqualLn();
+			PrintUtil.drawUnderscoreLn();
 		}
 	}
 	public void finalize() throws Throwable {

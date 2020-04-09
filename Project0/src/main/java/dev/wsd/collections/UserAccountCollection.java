@@ -22,13 +22,13 @@ public class UserAccountCollection<T>  extends ArrayList <UserAccount> {
 	public void printOptions() {
 		if (this != null) {
 			PrintUtil.drawHyphenLn();
-			PrintUtil.printLine("Your  Account (s) Summry  :");
+			PrintUtil.printLine("Your  Account (s) Summary  :");
 			PrintUtil.drawEqualLn();
 			for (UserAccount tr : this) {
 				PrintUtil.printLine("[ Account Num: " + tr.getAccountNum() +  "| Account Type:  "+tr.getAccountType().getTypeName() +"| Available Balance:  " + tr.getCurrentBalance() + " ].");
-				PrintUtil.drawEqualLn();
+				PrintUtil.drawHyphenLn();
 			}
-			PrintUtil.drawEqualLn();
+		PrintUtil.drawUnderscoreLn();
 		}
 	}
 	public void finalize() throws Throwable {

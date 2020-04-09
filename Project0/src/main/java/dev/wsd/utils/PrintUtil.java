@@ -100,8 +100,9 @@ public final class PrintUtil {
 	 * 
 	 * @param error
 	 */
-	public static void printLineError(String error) {
+	public static void printErrorLine(String error) {
 		System.err.println("Error Message: " + error);
+		PrintUtil.drawHyphenLn();
 	}
 
 	/**
@@ -117,7 +118,7 @@ public final class PrintUtil {
 	 * @param text
 	 */
 	public static void printWarning(String text) {
-		System.out.print("Warning: " + text);
+		System.err.print("Warning: " + text);
 	}
 
 	/**
@@ -132,8 +133,8 @@ public final class PrintUtil {
 	 * 
 	 * @param text
 	 */
-	public static void printLineWarning(String text) {
-		System.out.println("Warning: " + text);
+	public static void printWarningLine(String text) {
+		System.err.println("Warning: " + text);
 	}
 
 	

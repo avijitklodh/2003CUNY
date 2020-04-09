@@ -30,7 +30,7 @@ public class TransTypeCollection<T> extends ArrayList<TransactionType> {
 			for (TransactionType tr : this) {
 				PrintUtil.printLine("[" + tr.getId() + "] for " + tr.getTransName() + " .");
 			}
-			PrintUtil.drawEqualLn();
+			PrintUtil.drawUnderscoreLn();
 		}
 	}
 

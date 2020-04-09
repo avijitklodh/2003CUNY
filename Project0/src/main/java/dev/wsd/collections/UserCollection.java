@@ -25,15 +25,16 @@ public class UserCollection<T> extends ArrayList<User> {
 
 	public void printOptions() {
 		if (this != null) {
-			PrintUtil.drawHyphenLn();
-			PrintUtil.printLine("Registred Users view ");
-			PrintUtil.drawEqualLn();
+			PrintUtil.drawUnderscoreLn();
+			PrintUtil.printLine("List of All Registred Users ");
+			PrintUtil.drawUnderscoreLn();
+		
 			for (User tr : this) {
 				PrintUtil.printLine("[User ID: " + tr.getId() + " | First Name: " + tr.getFname() + " | Last Name: "
 						+ tr.getLname() + " | Email:" + tr.getEmail() + " | Is Admin:" + tr.isAdmin() + " ]");
 				PrintUtil.drawHyphenLn();
 			}
-			PrintUtil.drawEqualLn();
+			PrintUtil.drawUnderscoreLn();
 		}
 	}
 

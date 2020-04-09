@@ -25,21 +25,25 @@ public class AccountTransCollection<T> extends ArrayList<AccountTransaction> {
 	public void printOptions() {
 		if (this != null) {
 			PrintUtil.drawHyphenLn();
-			PrintUtil.printLine("Your  Account (s) Summry  :");
-			PrintUtil.drawEqualLn();
+			PrintUtil.printLine("Your  Account Transaction(s) Summary  :");
+			PrintUtil.drawHyphenLn();
+		
 			for (AccountTransaction tr : this) {
-				float AmountAfter =0;
+				float AmountAfter = 0;
 				PrintUtil.printLine("[ Account Num: " + tr.getAccount().getAccountNum() + "| Account Type: "
 						+ tr.getAccount().getAccountType().getTypeName() + "| Transaction Type: "
-						+ tr.getTransType().getTransName() +"| Transaction Date:"+tr.getTransDate()+"]");
-				 
-				PrintUtil.printLine("[ Balance Before: " + tr.getAmountBefore()
-						+ "| Tansaction Amount: " + tr.getTransAmount() + "| Balance After: "
+						+ tr.getTransType().getTransName() + "| Transaction Date:" + tr.getTransDate() + "]");
+
+				PrintUtil.printLine("[ Balance Before: " + tr.getAmountBefore() + "| Tansaction Amount: "
+						+ tr.getTransAmount() + "| Balance After: "
 						+ (AmountAfter = tr.getTransType().getId() == 1 ? tr.getTransAmount() + tr.getAmountBefore()
-								: tr.getAmountBefore() - tr.getTransAmount())+ " ].");
-				PrintUtil.drawEqualLn();
+								: tr.getAmountBefore() - tr.getTransAmount())
+						+ " ].");
+				PrintUtil.drawHyphenLn();
+
 			}
-			PrintUtil.drawEqualLn();
+			PrintUtil.drawUnderscoreLn();
+ 
 		}
 	}
 
