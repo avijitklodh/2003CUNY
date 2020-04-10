@@ -38,4 +38,15 @@ public class Account {
 		return "Account [id=" + id + ", balance=" + balance + ", nickname=" + nickname + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+
+		Account test = (Account) obj;
+		return test.id == this.id;
+	}
+
 }

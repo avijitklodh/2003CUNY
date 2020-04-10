@@ -9,7 +9,7 @@ import codes.newell.utilities.UiPair;
 public class Portal {
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to bank of Will!");
+		System.out.println("Welcome to the Willy Good Bank!");
 
 		List<UiPair> menu = new ArrayList<>();
 		menu.add(new UiPair("Log In", LogInUi::main));

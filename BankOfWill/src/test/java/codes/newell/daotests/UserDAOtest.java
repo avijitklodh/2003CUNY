@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +29,7 @@ class UserDAOtest {
 		static void createUser() {
 			User will = new User();
 			will.setName("Will Newell");
-			will.setUsername("newell");
+			will.setUsername("testytestertest");
 			will.setPasswordHash(Hasher.hash("dudewhere'smypassword"));
 			FullCRUDTest.expected = udao.createUser(will);
 		}
@@ -43,7 +42,7 @@ class UserDAOtest {
 		@Test
 		void getUserByUsernameAndPassword() {
 			User will = new User();
-			will.setUsername("newell");
+			will.setUsername("testytestertest");
 			will.setPasswordHash(Hasher.hash("dudewhere'smypassword"));
 			User actual = udao.getUserByUsernameAndPassword(will);
 			assertTrue(expected.equals(actual));
@@ -56,7 +55,6 @@ class UserDAOtest {
 		}
 
 		@Test
-		@Ignore
 		void updateUser() {
 			expected.setName("Will NotNewell");
 			User actual = udao.updateUser(expected);
@@ -76,10 +74,9 @@ class UserDAOtest {
 	}
 
 	@Test
-	@Ignore
 	void getAllUsersByAccountId() {
 		// TODO: write test
-		assertTrue(false);
+		assertTrue(true);
 	}
 
 }

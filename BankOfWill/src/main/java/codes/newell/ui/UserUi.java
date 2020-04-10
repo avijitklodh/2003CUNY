@@ -70,6 +70,7 @@ public class UserUi {
 		menu.add(new UiPair("View Transactions by Account", UserUi::listTransactionsByAccount));
 		menu.add(new UiPair("Deposit Funds", UserUi::depositFunds));
 		menu.add(new UiPair("Withdraw Funds", UserUi::withdrawFunds));
+		menu.add(new UiPair("Close Account", UserUi::closeAccount));
 		UiBuilder.executeMenu(menu);
 	}
 
@@ -98,6 +99,12 @@ public class UserUi {
 		for (Account n : accounts) {
 			System.out.printf("%-10s $%.2f\n", n.getNickname(), n.getBalance());
 		}
+	}
+
+	static void closeAccount() {
+		Account account = selectAccount();
+		acc.closeAccount(account, user);
+		System.out.println("Your account has been closed.");
 	}
 
 	static Account selectAccount() {

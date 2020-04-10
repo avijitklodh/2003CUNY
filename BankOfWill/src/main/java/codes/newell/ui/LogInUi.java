@@ -30,6 +30,8 @@ public class LogInUi {
 			} else {
 				UserUi.main();
 			}
+		} else {
+			System.out.println("Invalid credentials please try again.");
 		}
 	}
 }

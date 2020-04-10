@@ -94,12 +94,8 @@ public class UserDAOdb implements UserDAO {
 			rs.next();
 			updateUser(user, rs);
 			return user;
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+
 		}
 		return null;
 	}
