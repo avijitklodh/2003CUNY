@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="tableCss.css">
+</head>
+
+<body>
+
+    <h1>User Posts</h1>
+    <div>
+        <input type="text" id="txtsearch" placeholder="Enter User ID ">
+        <button id="btn2" onclick="getUserJsonPosts()">View User Posts </button>
+        <button id="btn1" onclick="getJsonPosts()">Load All Posts </button>
+    </div>
+    <div id="div2">
+        <table id="divposts" class="blueTable"><thead><tr> <td>Post ID</td><td>User ID</td><td>Title</td><td>Post Body</td> </tr></thead></table>
+    </div>
+
+    <div>
+
+    </div>
+    <p id="demo"></p>
+
+
+
+
+
+</body>
+<script>
+    function getJsonPosts() {
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+
+                let div1 = document.getElementById("divposts");
+                console.log("{ posts: " + this.responseText + "}");
+                let jsn = JSON.parse(this.responseText);
+                let uid = document.getElementById("txtsearch").innerText;
+                div1.innerHTML  = "<thead><tr> <td>Post ID</td><td>User ID</td><td>Title</td><td>Post Body</td> </tr></thead></table>";
+                for (var x in jsn) {
+                    div1.innerHTML = div1.innerHTML + "<tr><td>" + jsn[x].id + "<td>" + jsn[x].userId + "</td><td>" + jsn[x].title + "</td><td>" + jsn[x].body + "</td></tr>";
+                }
+
+
+
+            }
+        }
+
+
+        xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+        xhttp.send();
+
+    }
+    function getUserJsonPosts() {
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+
+                let div1 = document.getElementById("divposts");
+                console.log("{ posts: " + this.responseText + "}");
+                let jsn = JSON.parse(this.responseText);
+                let uid = document.getElementById("txtsearch").value;
+                console.log(uid);
+                div1.innerHTML  = "<thead><tr> <td>Post ID</td><td>User ID</td><td>Title</td><td>Post Body</td> </tr></thead></table>";
+                for (let x in jsn) {
+                    if (jsn[x].userId == uid)
+
+                        div1.innerHTML = div1.innerHTML + "<tr><td>" + jsn[x].id + "<td>" + jsn[x].userId + "</td><td>" + jsn[x].title + "</td><td>" + jsn[x].body + "</td></tr>";
+                }
+
+            }
+
+
+        }
+
+        xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+        xhttp.send();
+
+    }
+    function empty(data) {
+        if (typeof (data) == 'number' || typeof (data) == 'boolean') {
+            return false;
+        }
+        if (typeof (data) == 'undefined' || data === null) {
+            return true;
+        }
+        if (typeof (data.length) != 'undefined') {
+            return data.length == 0;
+        }
+        var count = 0;
+        for (var i in data) {
+            if (data.hasOwnProperty(i)) {
+                count++;
+            }
+        }
+        return count == 0;
+    }
+</script>
+<script>
+    function getJsonObj() {
+
+        let obj = { firstName: "John", lastName: "Doe" };
+
+
+        https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo
+        div1 = document.getElementById("div1");
+        let jsn = JSON.parse(obj);
+        console.log("fun2" + obj);
+        for (var x in jsn[0])
+            div1.innerText = div2.innerText + `${jsn.firstName} `;
+    }
+</script>
+
+</html>

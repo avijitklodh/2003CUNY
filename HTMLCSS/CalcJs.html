@@ -1,124 +1,239 @@
 ﻿<!DOCTYPE html>
-
 <html>
-<style type="text/css">
 
-    #resp-table {
-        width: 50%;
-        display: table;
-        border: 4px solid #73AD21;
-    }
-
-    #resp-table-header {
-        display: table-header-group;
-        background-color: gray;
-        font-weight: bold;
-        font-size: 25px;
-        border: 3px solid #00ff90;
-    }
-
-    .table-header-cell {
-        display: table-cell;
-        padding: 10px;
-        text-align: justify;
-        border-bottom: 1px solid black;
-    }
-
-    #resp-table-body {
-        display: table-row-group;
-        border: 3px solid #00ff90;
-    }
-
-    .resp-table-row {
-        display: table-row;
-    }
-    .table-body-cell {
-        border: 3px solid #0094ff;
-        display: table-cell;
-    }
-    .rTable {
-        display: table;
-        width: 100%;
-    }
-
-    .rTableRow {
-        display: table-row;
-    }
-
-    .rTableHeading {
-        display: table-header-group;
-        background-color: #ddd;
-    }
-
-    .rTableCell, .rTableHead {
-        display: table-cell;
-        padding: 3px 10px;
-        border: 1px solid #999999;
-    }
-
-    .rTableHeading {
-        display: table-header-group;
-        background-color: #ddd;
-        font-weight: bold;
-    }
-
-    .rTableFoot {
-        display: table-footer-group;
-        font-weight: bold;
-        background-color: #ddd;
-    }
-
-    .rTableBody {
-        display: table-row-group;
-    }
-		
-</style>
 <head>
+    <title>Calculator</title>
+    <style>
+        .rTop {
+            height: 25%;
+            width: 100%;
+            top: 0;
+            margin-top: 30%;
+        }
 
-    <title></title>
+        .rbuttom {
+            height: 25%;
+            width: 100%;
+            bottom: 0;
+            margin-bottom: 30%;
+        }
 
+        .rLeft {
+            height: 100%;
+            width: 25%;
+            margin-left: 30%;
+        }
+
+        .rRight {
+            height: 100%;
+            width: 25%;
+            margin-right: 70%;
+        }
+
+
+
+
+
+        .rTableRow {
+            display: table-row;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .rTableHeading {
+            display: table-header-group;
+            background-color: #ddd;
+        }
+
+        .rTableCell,
+        .rTableHead {
+            display: table-cell;
+            padding: 3px 10px;
+            border: 1px solid #999999;
+            height: 50px;
+            width: 50px;
+        }
+
+        .rTableHeading {
+            display: flex;
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+
+
+
+
+        .rtable-body {
+            display: table-row-group;
+            border: 3px solid #00ff90;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .container {
+            width: 500px;
+            margin: 5% auto;
+            padding: 0px;
+            background: #efecec;
+            display: grid;
+        }
+
+        .rTable {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .btn {
+            width: 70px;
+            height: 70px;
+            font-size: 25pt;
+        }
+
+        .tr {
+            width: 75px;
+            height: 75px;
+        }
+
+        .td {
+            width: auto;
+            height: 100%;
+            padding: 5px;
+        }
+
+        .display {
+            width: 100%;
+            height: 100px;
+            background-color: azure;
+            font-size: 20pt;
+            color: darkslateblue;
+
+        }
+
+        .history {
+            width: 100%;
+            height: 100%;
+            background-color: aliceblue;
+            border: solid 1px;
+
+        }
+    </style>
 </head>
-<body>
-    <div id="resp-table">
-        <div id="resp-table-caption">
-            My Javascripst Calculator
-        </div>
-        <div id="esp-table-body">
-            <div class="resp-table-row">
-                <div class="table-body-cell">
-                    Cell 1–1
-                </div>
-                <div class="table-body-cell">
-                    Cell 1–2
-                </div>
-                <div class="table-body-cell">
-                    Cell 1–3
-                </div>
-                <div class="table-body-cell">
-                    Cell 1–4
-                </div>
-                <div class="table-body-cell">
-                    Cell 1–5
-                </div>
-            </div>
-        </div>
 
-    </div>
-    <h2>Phone numbers</h2>
-    <div class="rTable">
-        <div class="rTableHeading">
-         
+<body>
+    <form id="Calc">
+
+        <div class="container">
+            <table>
+                <tr>
+                    <td class="td">
+                        <table class="rTable">
+                            <!--<thead><tr><th><h2>JavaScript Calculator</h2></th></tr> </thead>-->
+                            <tr class="tr">
+                                <td colspan="4"> <input type="text" class=" display" id="display" /></td>
+
+                            </tr>
+                            <tr class="tr">
+                                <td class="td"><input type="button" name="btnclear" class="btn" value="C"
+                                        OnClick="Calc.display.value  = ' '"> </td>
+                                <!--<td class="td"><button id="btn0" class="btn">0</button></td>
+                                <td class="td"><button id="btnequ" class="btn">=</button></td>
+                                <td class="td"><button id="btndiv" class="btn">/</button></td>-->
+                            </tr>
+                            <tr class="tr">
+                                <td class="td"><input type="button" id="btn7" class="btn" value="7"
+                                        OnClick="Calc.display.value += '7'"> </td>
+                                <td class="td"><input type="button" id="btn8" class="btn" value="8"
+                                        OnClick="Calc.display.value += '8'"> </td>
+                                <td class="td"><input type="button" id="btn9" class="btn" value="9"
+                                        OnClick="Calc.display.value += '9'"> </td>
+                                <td class="td"><input type="button" id="btnmul" class="btn" value="*"
+                                        OnClick="Calc.display.value += '*'"> </td>
+
+
+                            </tr>
+
+                            <tr class="tr">
+
+
+                                <td class="td"><input type="button" id="btn4" class="btn" value="4"
+                                        OnClick="Calc.display.value += '4'"> </td>
+                                <td class="td"><input type="button" id="btn5" class="btn" value="5"
+                                        OnClick="Calc.display.value += '5'"> </td>
+                                <td class="td"><input type="button" id="btn6" class="btn" value="6"
+                                        OnClick="Calc.display.value += '6'"> </td>
+                                <td class="td"><input type="button" id="btnsub" class="btn" value="-"
+                                        OnClick="Calc.display.value += '-'"> </td>
+                            </tr>
+                            <tr class="tr">
+
+
+                                <td class="td"><input type="button" id="btn1" class="btn" value="1"
+                                        OnClick="Calc.display.value += '1'"> </td>
+                                <td class="td"><input type="button" id="btn2" class="btn" value="2"
+                                        OnClick="Calc.display.value += '2'"> </td>
+                                <td class="td"><input type="button" id="btn3" class="btn" value="3"
+                                        OnClick="Calc.display.value += '3'"> </td>
+                                <td class="td"><input type="button" id="btnadd" class="btn" value="+"
+                                        OnClick="Calc.display.value += '+'"> </td>
+                            </tr>
+                            <tr class="tr">
+                                <!-- Calc.history.value = Calc.history.value+Calc.display.value-->
+
+                                <td class="td"><input type="button" id="btndec" class="btn" value="."
+                                        OnClick="Calc.display.value += '.'"> </td>
+                                <td class="td"><input type="button" id="btn0" class="btn" value="0"
+                                        OnClick="Calc.display.value += '0'"> </td>
+                                <td class="td"><input type="button" id="btnequ" class="btn" value="="
+                                        OnClick="addTask('<b>'+Calc.display.value+'='); Calc.display.value = eval(Calc.display.value) ;addTask( Calc.display.value);">
+                                </td>
+                                <td class="td"><input type="button" id="btndiv" class="btn" value="/"
+                                        OnClick="Calc.display.value += '/'"> </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td class="td" rowspan="2" colspan="2" class=" history">
+                        <div id="history" class=" history"></div>
+                    </td>
+                </tr>
+            </table>
+
+
         </div>
-        <div class="rTableRow">
-            <div class="rTableCell">John</div>
-            <div class="rTableCell"> </div>
-            <div class="rTableCell"> </div>
-        </div>
-        <div class="rTableRow">
-            <div class="rTableCell">Cassie</div>
-            <div class="rTableCell"> </div>
-            <div class="rTableCell"> </div>
-        </div>
-    </div>
+    </form>
 </body>
+<script type="text/javascript">
+
+
+    function addTask(val) {
+        // document.getElementById("btnequ").addEventListener("click", addTask);
+        //  let task = document.getElementById("display").value;
+        //var allControls = form.elements;
+        // console.log("1-" + task);
+        let taskList = document.getElementById("history");
+        // let tasks = [];
+
+
+        //  tasks.push(task);
+        taskList.innerHTML =taskList.innerHTML + val+'<br/>';
+        //  var geval = eval;
+        // task = eval(task.value);
+        // tasks.push("=" + task);
+
+        // taskList.innerHTML = taskList.innerHTML + '<li>' + task + '</li>';
+        // taskList.innerHTML = taskList.innerHTML + `<li>${task}</li>`;
+
+
+        //  let x = document.getElementById("history").innerText;
+        console.log('x is ', eval(9+0.90));
+
+    }
+
+
+</script>
+
 </html>

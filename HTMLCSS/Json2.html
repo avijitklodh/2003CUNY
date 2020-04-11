@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pokedex</title>
+</head>
+<body>
+    <h1>Pokedex</h1>
+
+    <h3>Pokemon Finder</h3>
+    <input id="pokeInput" type="text" placeholder="pokemon">
+    <button id="searchBtn">Look Up Pokemon</button>
+
+    <table>
+        <tr><th>id</th><th>name</th><th>type</th></tr>
+        <tr id="pokedata"></tr>
+    </table>
+    <img id="pokeImg" src="" alt="pokemon">
+    
+</body>
+<script>
+
+    document.getElementById("searchBtn").addEventListener("click", getPokemon);
+
+    async function getPokemon(){
+        let pokeName = document.getElementById("pokeInput").value;
+        let httpResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}/`);
+        let body = await httpResponse.json();
+
+        let info = `<td>${body.id}</td> <td>${body.name}</td> <td>${body.types[0].type.name}</td> `;
+        document.getElementById("pokedata").innerHTML = info;
+
+        let img = document.getElementById("pokeImg");
+        img.src = body.sprites.front_default;
+    }
+
+
+</script>
+
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        .rTop {
+            height: 25%;
+            width: 100%;
+            top: 0;
+            margin-top: 30%;
+        }
+
+        .rbuttom {
+            height: 25%;
+            width: 100%;
+            bottom: 0;
+            margin-bottom: 30%;
+        }
+
+        .rLeft {
+            height: 100%;
+            width: 25%;
+            margin-left: 30%;
+        }
+
+        .rRight {
+            height: 100%;
+            width: 25%;
+            margin-right: 70%;
+        }
+
+
+
+
+
+        .rTableRow {
+            display: table-row;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .rTableHeading {
+            display: table-header-group;
+            background-color: #ddd;
+        }
+
+        .rTableCell,
+        .rTableHead {
+            display: table-cell;
+            padding: 3px 10px;
+            border: 1px solid #999999;
+            height: 50px;
+            width: 50px;
+        }
+
+        .rTableHeading {
+            display: flex;
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+
+
+
+
+        .rtable-body {
+            display: table-row-group;
+            border: 3px solid #00ff90;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .container {
+            width: 500px;
+            margin: 5% auto;
+            padding: 0px;
+            background: #efecec;
+            display: grid;
+        }
+
+        .rTable {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .btn {
+            width: 70px;
+            height: 70px;
+            font-size: 25pt;
+        }
+
+        .tr {
+            width: 75px;
+            height: 75px;
+        }
+
+        .td {
+            width: auto;
+            height: 100%;
+            padding: 5px;
+        }
+
+        .display {
+            width: 100%;
+            height: 100px;
+            background-color: azure;
+            font-size: 20pt;
+            color: darkslateblue;
+
+        }
+
+        .history {
+            width: auto;
+            height: 100%;
+            background-color: aliceblue;
+            border: solid 1px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <table>
+            <tr>
+                <td class="td">
+                    <table class="rTable">
+                        <!--<thead><tr><th><h2>JavaScript Calculator</h2></th></tr> </thead>-->
+                        <tr class="tr">
+                            <td colspan="4"> <input type="text" class=" display" id="display" /></td>
+
+                        </tr>
+                        <tr class="tr">
+                            <td class="td"><input type="button" name="btnclear" class="btn" value="C"
+                                    OnClick="addTask(null);"> </td>
+                            <!--<td class="td"><button id="btn0" class="btn">0</button></td>
+                                <td class="td"><button id="btnequ" class="btn">=</button></td>
+                                <td class="td"><button id="btndiv" class="btn">/</button></td>-->
+                        </tr>
+                        <tr class="tr">
+                            <td class="td"><input type="button" id="btn7" class="btn" value="7"
+                                    OnClick="addTask('btn7');"> </td>
+                            <td class="td"><input type="button" id="btn8" class="btn" value="8"
+                                    OnClick="addTask('btn8');"> </td>
+                            <td class="td"><input type="button" id="btn9" class="btn" value="9"
+                                    OnClick="addTask('btn9');"> </td>
+                            <td class="td"><input type="button" id="btnmul" class="btn" value="*"
+                                    OnClick="addTask('btnmul');"> </td>
+
+
+                        </tr>
+
+                        <tr class="tr">
+
+
+                            <td class="td"><input type="button" id="btn4" class="btn" value="4"
+                                    OnClick="addTask('btn4');"> </td>
+                            <td class="td"><input type="button" id="btn5" class="btn" value="5"
+                                    OnClick="addTask('btn5');"> </td>
+                            <td class="td"><input type="button" id="btn6" class="btn" value="6"
+                                    OnClick="addTask('btn6');"> </td>
+                            <td class="td"><input type="button" id="btnsub" class="btn" value="-"
+                                    OnClick="addTask('btnsub');"> </td>
+                        </tr>
+                        <tr class="tr">
+
+
+                            <td class="td"><input type="button" id="btn1" class="btn" value="1"
+                                    OnClick="addTask('btn1');"> </td>
+                            <td class="td"><input type="button" id="btn2" class="btn" value="2"
+                                    OnClick="addTask('btn2');"></td>
+                            <td class="td"><input type="button" id="btn3" class="btn" value="3"
+                                    OnClick="addTask('btn3');"> </td>
+                            <td class="td"><input type="button" id="btnadd" class="btn" value="+"
+                                    OnClick="addTask('btnadd');"> </td>
+                        </tr>
+                        <tr class="tr">
+                            <!-- Calc.history.value = Calc.history.value+Calc.display.value-->
+
+                            <td class="td"><input type="button" id="btndec" class="btn" value="."
+                                    OnClick="addTask('btndec');"> </td>
+                            <td class="td"><input type="button" id="btn0" class="btn" value="0"
+                                    OnClick="addTask('btn0');"> </td>
+                            <td class="td"><input type="button" id="btnequ" class="btn" value="="
+                                    OnClick="addTask('btnequ');">
+                            </td>
+                            <td class="td"><input type="button" id="btndiv" class="btn" value="/"
+                                    OnClick="addTask('btndiv');"> </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td class="td" rowspan="2" colspan="2" class=" history">
+                    <div id="history" class=" history"></div>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+
+</body>
+<script type="text/javascript">
+
+    function addTask(val) {
+        // document.getElementById("btnequ").addEventListener("click", addTask);
+        let display = document.getElementById("display");
+        //var allControls = form.elements;
+        // console.log("1-" + task);
+        let ctr = document.getElementById(val);
+        let taskList = document.getElementById("history");
+        // let tasks = [];
+
+        /*  console.log('typeof (ctr) === undefined ' + (typeof (ctr) === 'undefined'));
+          console.log('typeof (ctr) == undefined ' + (typeof (ctr) == 'undefined'));
+          console.log('ctr === undefined ' +( ctr === 'undefined'));
+          console.log('ctr == undefined ' + (ctr == 'undefined'));
+          console.log('ctr == "undefined" ' + (ctr == 'undefined'));
+          console.log('ctr ==="undefined" ' + (ctr === 'undefined'));
+          console.log('ctr === null ' + (ctr === null));
+          console.log('ctr == null ' + (ctr == null));
+              console.log('!(ctr === null) ' + (!(ctr === null)));
+        console.log('!(ctr === undefined) ' + (!(ctr === undefined)));
+        console.log('(ctr === null) ' + ((ctr === null)));
+        console.log('(ctr === undefined) ' + ((ctr === undefined)));
+          */
+        console.log('! (display.value === "") ' + !(display.value === ''));
+
+        if (ctr === null || ctr === undefined) {
+            display.value = null;
+        }
+
+        if (ctr.value === '=') {
+            let Ops = display.value;
+            let rsult = eval(display.value);
+            let opsstr = Ops.fontcolor('blue');
+            //this validation in case the evaluation has any error and returns no results
+            if (rsult === undefined)
+                display.value = null;
+            else {
+                display.value = rsult;
+                taskList.innerHTML = taskList.innerHTML + opsstr + '<b>= <font color="darkorange">' + rsult + '</font></b><br/>';
+            }
+        }
+        else
+            display.value += ctr.value;
+
+
+
+
+        /// console.log("5+6");
+        //console.log("ctr.value-" + ctr.value);
+        // console.log("taskList-" + taskList);
+        // console.log("result-" + result);
+
+        //  tasks.push(task);
+
+        //  var geval = eval;
+
+        // tasks.push("=" + task);
+
+        // taskList.innerHTML = taskList.innerHTML + '<li>' + task + '</li>';
+        // taskList.innerHTML = taskList.innerHTML + `<li>${task}</li>`;
+
+
+        //  let x = document.getElementById("history").innerText;
+
+
+    }
+
+
+</script>
+<script>
+    function changeStyle() {
+        // Selecting element
+        var elem = document.getElementById("info");
+
+        elem.classList.add("hide");  // Add a new class
+        elem.classList.add("note", "highlight");  // Add multiple classes
+        elem.classList.remove("hide"); // Remove a class
+        elem.classList.remove("disabled", "note"); // Remove multiple classes
+        elem.classList.toggle("visible"); // If class exists remove it, if not add it
+
+        // Determine if class exist
+        if (elem.classList.contains("highlight")) {
+            alert("The specified class exists on the element.");
+        }
+    }
+</script>
+
+</html>
