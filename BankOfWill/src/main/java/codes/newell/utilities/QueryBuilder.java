@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringJoiner;
 
-public class QueryBuilder<T> {
+public class QueryBuilder {
+
 	private static enum Types {
 		CREATE, SELECT_WHERE, SELECT_ALL, UPDATE, DELETE;
 	}
@@ -22,7 +23,7 @@ public class QueryBuilder<T> {
 	private Types type;
 	private String whereClause = "where id = ?";
 
-	public QueryBuilder(T t, Types type) {
+	public QueryBuilder(Class<?> reference, Types type) {
 		this.type = type;
 		this.excludedFields.add("id");
 
@@ -44,10 +45,8 @@ public class QueryBuilder<T> {
 			break;
 		}
 
-		Class<?> c = t.getClass();
-		fields = c.getDeclaredFields();
-
-		String name = '"' + c.getSimpleName().toLowerCase() + '"';
+		fields = reference.getDeclaredFields();
+		String name = '"' + reference.getSimpleName().toLowerCase() + '"';
 		query.add(name);
 
 		if (type == UPDATE) {

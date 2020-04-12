@@ -14,7 +14,8 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public Account getAccountById(Integer id) {
-		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.SELECT_WHERE);
+
+		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.SELECT_WHERE);
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
@@ -35,7 +36,7 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public List<Account> getAllAccounts() {
-		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.SELECT_ALL);
+		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.SELECT_ALL);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 
 		try {
@@ -57,7 +58,7 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public List<Account> getAccountsByUserId(Integer id) {
-		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("inner join user_account on id = account_id and user_id = ?");
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
@@ -82,8 +83,7 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public Account createAccount(Account account) {
-		// (first_name, last_name, username, password_hash, is_super)
-		QueryBuilder<Account> qb = new QueryBuilder<>(account, QueryBuilder.CREATE);
+		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.CREATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(account.getBalance());
@@ -105,7 +105,7 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public Account updateAccount(Account account) {
-		QueryBuilder<Account> qb = new QueryBuilder<>(account, QueryBuilder.UPDATE);
+		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.UPDATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(account.getBalance());
@@ -128,7 +128,7 @@ public class AccountDAOdb implements AccountDAO {
 
 	@Override
 	public boolean deleteAccountById(Integer id) {
-		QueryBuilder<Account> qb = new QueryBuilder<>(new Account(), QueryBuilder.DELETE);
+		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.DELETE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		try {
 			cm.executeWithParameter(id);
@@ -140,13 +140,13 @@ public class AccountDAOdb implements AccountDAO {
 		return false;
 	}
 
-	private void updateAccount(Account account, ResultSet rs) throws SQLException {
+	private static void updateAccount(Account account, ResultSet rs) throws SQLException {
 		account.setId(rs.getInt("id"));
 		account.setBalance(rs.getDouble("balance"));
 		account.setNickname(rs.getString("nickname"));
 	}
 
-	private Account buildAccount(ResultSet rs) throws SQLException {
+	private static Account buildAccount(ResultSet rs) throws SQLException {
 		Account account = new Account();
 		updateAccount(account, rs);
 		return account;

@@ -14,7 +14,7 @@ public class UserDAOdb implements UserDAO {
 
 	@Override
 	public User getUserById(Integer id) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.SELECT_WHERE);
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
@@ -35,7 +35,7 @@ public class UserDAOdb implements UserDAO {
 
 	@Override
 	public List<User> getAllUsers() {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.SELECT_ALL);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.SELECT_ALL);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 
 		try {
@@ -57,7 +57,7 @@ public class UserDAOdb implements UserDAO {
 
 	@Override
 	public List<User> getUsersByAccountId(Integer id) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("inner join user_account on id = user_id and account_id = ?");
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
@@ -82,7 +82,7 @@ public class UserDAOdb implements UserDAO {
 
 	@Override
 	public User getUserByUsernameAndPassword(User user) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("where username = ? and password_hash = ?");
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
@@ -103,7 +103,7 @@ public class UserDAOdb implements UserDAO {
 	@Override
 	public User createUser(User user) {
 		// (first_name, last_name, username, password_hash, is_super)
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.CREATE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.CREATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(user.getFirstName());
@@ -129,7 +129,7 @@ public class UserDAOdb implements UserDAO {
 	@Override
 	public User updateUser(User user) {
 		// (first_name, last_name, username, password_hash, is_super) where id
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.UPDATE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.UPDATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(user.getFirstName());
@@ -155,7 +155,7 @@ public class UserDAOdb implements UserDAO {
 
 	@Override
 	public boolean deleteUserById(Integer id) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.DELETE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.DELETE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		try {
 			cm.executeWithParameter(id);
@@ -167,7 +167,7 @@ public class UserDAOdb implements UserDAO {
 		return false;
 	}
 
-	private void updateUser(User user, ResultSet rs) throws SQLException {
+	private static void updateUser(User user, ResultSet rs) throws SQLException {
 		user.setId(rs.getInt("id"));
 		user.setAdminStatus(rs.getBoolean("is_super"));
 		user.setFirstName(rs.getString("first_name"));
@@ -176,7 +176,7 @@ public class UserDAOdb implements UserDAO {
 		user.setPasswordHash(rs.getString("password_hash"));
 	}
 
-	private User buildUser(ResultSet rs) throws SQLException {
+	private static User buildUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		updateUser(user, rs);
 		return user;
@@ -184,7 +184,7 @@ public class UserDAOdb implements UserDAO {
 
 	@Override
 	public User getUserByUsername(String username) {
-		QueryBuilder<User> qb = new QueryBuilder<>(new User(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(User.class, QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("where username = ?");
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());

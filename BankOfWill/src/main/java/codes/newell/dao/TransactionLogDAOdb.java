@@ -15,7 +15,7 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 	@Override
 	public Transaction createTransaction(Transaction t) {
 		// (amount, message, t_date, from_account, to_account user_id)
-		QueryBuilder<Transaction> qb = new QueryBuilder<>(new Transaction(), QueryBuilder.CREATE);
+		QueryBuilder qb = new QueryBuilder(Transaction.class, QueryBuilder.CREATE);
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
 		params.add(t.getAmount());
@@ -41,7 +41,7 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 
 	@Override
 	public Transaction getTransactionById(Integer id) {
-		QueryBuilder<Transaction> qb = new QueryBuilder<>(new Transaction(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(Transaction.class, QueryBuilder.SELECT_WHERE);
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
@@ -62,7 +62,7 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 
 	@Override
 	public List<Transaction> getTransactionsByUserId(Integer id) {
-		QueryBuilder<Transaction> qb = new QueryBuilder<>(new Transaction(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(Transaction.class, QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("where user_id = ?");
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
@@ -87,7 +87,7 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 
 	@Override
 	public List<Transaction> getTransactionsByAccountId(Integer id) {
-		QueryBuilder<Transaction> qb = new QueryBuilder<>(new Transaction(), QueryBuilder.SELECT_WHERE);
+		QueryBuilder qb = new QueryBuilder(Transaction.class, QueryBuilder.SELECT_WHERE);
 		qb.customWhereClause("where to_account = ? or from_account = ?");
 
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
@@ -111,7 +111,7 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 		return null;
 	}
 
-	private void updateTransaction(Transaction t, ResultSet rs) throws SQLException {
+	private static void updateTransaction(Transaction t, ResultSet rs) throws SQLException {
 		t.setAmount(rs.getDouble("amount"));
 		t.setMessage(rs.getString("message"));
 		t.setDate(rs.getString("t_date"));
@@ -128,7 +128,7 @@ public class TransactionLogDAOdb implements TransactionLogDAO {
 
 	@Override
 	public boolean deleteTransactionsByAccountId(Integer id) {
-		QueryBuilder<Transaction> qb = new QueryBuilder<>(new Transaction(), QueryBuilder.DELETE);
+		QueryBuilder qb = new QueryBuilder(Transaction.class, QueryBuilder.DELETE);
 		qb.customWhereClause("where to_account = ? or from_account = ?");
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
 		List<Object> params = new ArrayList<>();
