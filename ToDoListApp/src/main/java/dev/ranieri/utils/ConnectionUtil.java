@@ -15,7 +15,10 @@ public static Connection createConnection() {
 		try {
 			Properties props = new Properties();
 			
-	
+			// Sometimes the driver class does not load correctly into the JRE
+			// this snippet forces the class to be loaded
+			Class.forName("org.mariadb.jdbc.Driver");
+			
 			FileInputStream in = 
 new FileInputStream(ConnectionUtil.class.getClassLoader().getResource("connection.properties").getFile());
 			props.load(in);			
@@ -30,6 +33,9 @@ new FileInputStream(ConnectionUtil.class.getClassLoader().getResource("connectio
 			e.printStackTrace();
 			return null;
 		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return null;
 		}
