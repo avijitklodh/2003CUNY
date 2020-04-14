@@ -33,6 +33,7 @@ public class DispatcherServlet extends HttpServlet {
 		switch(uri) {
 		
 		case "/ToDoListApp/api/tasks" : tcontroller.getAllTasks(request, response); break;
+		case "/ToDoListApp/api/addtask" : tcontroller.addTask(request, response); break;
 		
 		default : response.getWriter().append("your request uri did not match anything");break;
 		}
