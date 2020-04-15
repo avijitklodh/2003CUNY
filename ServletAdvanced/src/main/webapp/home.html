@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+    <h1>Welcome!!</h1>
+    <h2 id="usernameHeading"></h2>
+    
+</body>
+<script>
+
+    // function that makes a request to a servlet that returns a username string
+    // Sets the username returned to the h2  heading
+    async function showUser(){
+
+
+        let httpResponse = await fetch("http://localhost:8080/ServletAdvanced/HomePageServlet");
+        let body = await httpResponse.text();
+
+        document.getElementById("usernameHeading").innerHTML = body;
+        console.log("finished show user")
+    }
+    // calls the functino when the page loads
+    showUser()
+
+</script>
+</html>

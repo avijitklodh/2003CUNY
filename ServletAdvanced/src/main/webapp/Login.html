@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+    <h1>Super secure login page</h1>
+    <input id="usernameInput" type="text" placeholder="username">
+    <button onclick="login()">Login</button>
+    
+</body>
+<script>
+
+    //function that sends a username to a LoginServlet that attaches
+    // that username to a session object
+    async function login(){
+        let username = document.getElementById("usernameInput").value;
+ let httpResponse = await fetch("http://localhost:8080/ServletAdvanced/LoginServlet?username="+username)
+       
+       //redirects me to another page
+        window.location.href = "http://localhost:8080/ServletAdvanced/home.html";
+    }
+    
+
+</script>
+</html>
