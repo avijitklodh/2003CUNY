@@ -32,8 +32,13 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println(uri);
 		switch(uri) {
 		
+		// API application program interface does not usuallay do not return HTML pages/css/js
+		// They are end points that you can send and get information from (usually in JSON)
 		case "/ToDoListApp/api/tasks" : tcontroller.getAllTasks(request, response); break;
 		case "/ToDoListApp/api/addtask" : tcontroller.addTask(request, response); break;
+		case "/ToDoListApp/api/pendingtasks" : tcontroller.pendingTasks(request, response); break;
+		case "/ToDoListApp/api/updatetask" : tcontroller.updateTask(request, response); break;
+		case "/ToDoListApp/api/completedtasks" : tcontroller.completedTasks(request, response); break;
 		
 		default : response.getWriter().append("your request uri did not match anything");break;
 		}

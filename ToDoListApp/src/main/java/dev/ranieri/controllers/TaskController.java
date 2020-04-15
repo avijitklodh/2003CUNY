@@ -38,6 +38,27 @@ public class TaskController {
 	tserv.createTask(task);
 	response.getWriter().append("Success!!!!");
 	}
+		
+	public void pendingTasks(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Gson gson = new Gson();
+		String json = gson.toJson(tserv.retrievePendingTasks());
+		response.getWriter().append(json);		
+	}
 	
+	
+	public void completedTasks(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Gson gson = new Gson();
+		String json = gson.toJson(tserv.retrieveCompletedTasks());
+		response.getWriter().append(json);
+	}
+	
+	public void updateTask(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Gson gson = new Gson();
+		String json = request.getReader().lines().reduce("", (accumulator,actual) ->accumulator+actual);
+		Task task = gson.fromJson(json, Task.class);
+		tserv.markTaskComplete(task);
+		System.out.println(task);
+		response.getWriter().append("Successfully updated Task!!!!");
+	}
 
 }
