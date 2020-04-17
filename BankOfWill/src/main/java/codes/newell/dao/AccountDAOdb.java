@@ -16,8 +16,8 @@ public class AccountDAOdb implements AccountDAO {
 	public Account getAccountById(Integer id) {
 
 		QueryBuilder qb = new QueryBuilder(Account.class, QueryBuilder.SELECT_WHERE);
-
 		ConnectionManager cm = ConnectionFactory.buildManager(qb.buildQuery());
+
 		List<Object> params = new ArrayList<>();
 		params.add(id);
 		try {
