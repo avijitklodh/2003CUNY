@@ -1,0 +1,16 @@
+<h1>Find that Pokemon!!</h1>
+
+<input type="text" [(ngModel)] = "pokeName">
+<button (click) = "findPokemon()">Find Pokemon</button>
+
+<h4>Pokemon name : {{pokemon.name}}</h4>
+<h4>Pokemon height : {{pokemon.height}}</h4>
+<!-- 
+this is called attibute binding
+bind an anttribute to a variable in typescript -->
+
+<img *ngIf = "pokemon" [src]="pokemon.sprites.front_default" alt="Pokemon goes here">
+
+<ul>
+    <li *ngFor = "let move of pokemon.moves">{{move.move.name}}</li>
+</ul>

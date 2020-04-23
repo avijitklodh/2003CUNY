@@ -1,0 +1,15 @@
+
+
+<h3>Request More Information</h3>
+
+<p>If you have any questions or would like to tour
+    the WV Revature Facility please send us a follow Request
+    and we will get back to you as soon as possible
+</p>
+<!-- ngmodel will allow us to instantaneouly transfer information from
+HTML to TS and vice versa -->
+
+<input type="text" placeholder="your name" [(ngModel)] = "name">
+<input type="text" placeholder="email address" [(ngModel)] = "email">
+<input type="text" placeholder="phone number" [(ngModel)] = phonenumber>
+<button (click)= "submitForm()">Submit</button>

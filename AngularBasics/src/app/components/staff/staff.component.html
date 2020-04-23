@@ -1,3 +1,10 @@
+
+
+<!-- ngIf is a structural directive that if true shows the elements
+false hides them -->
+
+<button (click)= "showEmployees()">{{btnLabel}}</button>
+<div *ngIf = "employeesVisible">
 <h2>Meet my fellow employees at the West Virginia branch</h2>
 
 <app-employee name="Shelby Lloyd" title="Associate Mentor" contactInfo =3045555555 ></app-employee>
@@ -5,3 +12,12 @@
 <app-employee name="Ryan Schlientz" title="Trainer" contactInfo =4445555555 ></app-employee>
 <app-employee name="Richard Orr" title="Lead Trainer" contactInfo =3335555555 ></app-employee>
 
+
+<h4>Current Associates at the WV Branch</h4>
+
+<ul>
+    <!-- structural directive that repeats the element once per item in list -->
+    <li *ngFor = "let associate of associates">{{associate}}</li>
+</ul>
+
+</div>

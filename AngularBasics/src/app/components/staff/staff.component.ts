@@ -9,7 +9,21 @@ export class StaffComponent implements OnInit {
 
   constructor() { }
 
+  employeesVisible:boolean = false;
+  btnLabel:string = "Show Employees";
+  associates:Array<string> = ["Jaxon","Peter","Jackie","Art","Ian"];
+
   ngOnInit(): void {
+  }
+
+  showEmployees():void{
+    this.employeesVisible = !this.employeesVisible;
+    
+    if(this.employeesVisible === true){
+      this.btnLabel = "hide employees";
+    }else{
+      this.btnLabel = "Show employees";
+    }
   }
 
 }
