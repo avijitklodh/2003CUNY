@@ -1,7 +1,9 @@
 package dev.ranieri.daos;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,7 +40,14 @@ public class DirectorDAOHibernateImpl implements DirectorDAO {
 
 	public Set<Director> getAllDirectors() {
 
-		return null;
+		// Criteria Interface 
+		
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Director.class);
+		
+		Set<Director> directors = new HashSet(crit.list());
+		
+		return directors;
 	}
 
 	public Director updateDirector(Director director) {

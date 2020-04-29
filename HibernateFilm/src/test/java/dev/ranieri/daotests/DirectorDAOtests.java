@@ -2,6 +2,8 @@ package dev.ranieri.daotests;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.Test;
 
 import dev.ranieri.daos.DirectorDAO;
@@ -18,5 +20,13 @@ public class DirectorDAOtests {
 		Director d = new Director (0,"Will Tarantino");
 		ddao.createDirector(d);
 	}
+	
+	@Test
+	public void getAllDirectors() {
+		
+		Set<Director> directors = ddao.getAllDirectors();
+		System.out.println(directors);
+	}
+
 
 }
