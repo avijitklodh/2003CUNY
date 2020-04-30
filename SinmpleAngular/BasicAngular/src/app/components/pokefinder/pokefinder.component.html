@@ -1,0 +1,11 @@
+<p>pokefinder works!</p>
+<input type="text" [(ngModel)]="pokename">
+
+<button (click)="findpokemon()"> Get Pokemon</button>
+
+<h2>Name : {{pokemon.name}}</h2>
+<h2>Height: {{pokemon.height}}</h2>
+<img style="width: 250px;width: 250px;" *ngIf="pokemon" [src]="pokemon.sprites.front_default " alt="Pokemon Shape">
+<ol>
+    <li *ngFor="let move of pokemon.moves"> {{move.move.name}}</li>
+</ol>

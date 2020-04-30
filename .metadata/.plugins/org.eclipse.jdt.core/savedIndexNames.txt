@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+D:\Work\Revature\Repository\2003CUNY\Wael\.metadata\.plugins\org.eclipse.jdt.core
-1568520317.index
-865230503.index
