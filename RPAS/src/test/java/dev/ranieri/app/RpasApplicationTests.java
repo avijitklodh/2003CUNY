@@ -29,9 +29,8 @@ class RpasApplicationTests {
 	@Test
 	void getAllAssociates() {
 		
-		Iterable<Associate> associates =  ar.findAll();
-		Set<Associate> associateset = new HashSet<Associate>((Collection<? extends Associate>) associates);
-		System.out.println(associateset);
+		List<Associate> associates = (List<Associate>) ar.findAll();;
+		System.out.println(associates);
 		
 	}
 	
@@ -53,8 +52,8 @@ class RpasApplicationTests {
 	
 	@Test
 	void getAssociatesByLowerPoints() {
-		List<Associate> associates = ar.findByPointsLessThan(0);
-		System.out.println(associates);		
+		List<Associate> associates = ar.findByPointsBetween(0, 1000);
+		System.out.println(associates);
 	}
 	
 	// because we put at transactional any crud operations are automically rolled back in your tests

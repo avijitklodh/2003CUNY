@@ -13,5 +13,5 @@ import dev.ranieri.entities.Associate;
 public interface AssociateRepository extends CrudRepository<Associate,Integer> {
 
 	List<Associate> findByName(String name);
-	List<Associate> findByPointsLessThan(int points);
+	List<Associate> findByPointsBetween(int min,int max);
 }
