@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Reva-gateway-server
+zuul:
+  prefix: /reva
+  routes:
+    associates:
+      path: /as/**
+      service-id: Associate-Service
+    trainers:
+      path: /ts/**
+      service-id: Transfer-Service 
+server:
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 2
+    lease-renewal-interval-in-seconds: 1
+
